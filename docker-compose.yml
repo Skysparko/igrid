@@ -1,0 +1,38 @@
+services:
+  api:
+    image: mentingo-api
+    container_name: mentingo-api
+    restart: unless-stopped
+    env_file: .env.api
+    command: server
+    ports:
+      - "3001:3000"
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: mentingo-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: guidebook
+      POSTGRES_DB: guidebook
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:latest
+    container_name: mentingo-redis
+    restart: unless-stopped
+
+  ui:
+    image: mentingo-ui
+    container_name: mentingo-ui
+    restart: unless-stopped
+    env_file: .env.ui
+    ports:
+      - "7001:8080"
+
+volumes:
+  db-data:
