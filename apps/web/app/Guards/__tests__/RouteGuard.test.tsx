@@ -28,7 +28,7 @@ describe("RouteGuard", () => {
         path: "/",
         children: [
           {
-            path: "admin/courses",
+            path: "dashboard/admin/courses",
             Component: () => (
               <RouteGuard>
                 <div>Protected Content</div>
@@ -39,7 +39,9 @@ describe("RouteGuard", () => {
       },
     ]);
 
-    renderWith({ withQuery: true }).render(<RemixStub initialEntries={["/admin/courses"]} />);
+    renderWith({ withQuery: true }).render(
+      <RemixStub initialEntries={["/dashboard/admin/courses"]} />,
+    );
 
     expect(await screen.findByText("Protected Content")).toBeTruthy();
   });
@@ -58,7 +60,7 @@ describe("RouteGuard", () => {
         path: "/",
         children: [
           {
-            path: "admin/courses",
+            path: "dashboard/admin/courses",
             Component: () => (
               <RouteGuard>
                 <div>Protected Content</div>
@@ -69,7 +71,9 @@ describe("RouteGuard", () => {
       },
     ]);
 
-    renderWith({ withQuery: true }).render(<RemixStub initialEntries={["/admin/courses"]} />);
+    renderWith({ withQuery: true }).render(
+      <RemixStub initialEntries={["/dashboard/admin/courses"]} />,
+    );
 
     expect(screen.queryByText("Protected Content")).toBeNull();
   });

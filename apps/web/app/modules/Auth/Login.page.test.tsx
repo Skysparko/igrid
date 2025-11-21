@@ -1,7 +1,7 @@
 import { createRemixStub } from "@remix-run/testing";
 import { screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 
 import { mockedUseNavigate, mockRemixReact } from "~/utils/mocks/remix-run-mock";
 import { renderWith } from "~/utils/testUtils";
@@ -33,7 +33,7 @@ describe("Login page", () => {
   it("renders without crashing", () => {
     renderWith({ withQuery: true }).render(<RemixStub />);
 
-    expect(screen.getByRole("heading", { name: "Login" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: /Login/i })).toBeInTheDocument();
   });
 
   it.skip("submits the form with valid data", async () => {

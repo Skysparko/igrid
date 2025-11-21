@@ -5,12 +5,12 @@ import type { NavigationItem, NavigationGroups } from "../navigationConfig";
 
 describe("findMatchingRoute", () => {
   it("should find exact matches", () => {
-    const roles = findMatchingRoute("admin/courses");
+    const roles = findMatchingRoute("dashboard/admin/courses");
     expect(roles).toEqual([USER_ROLE.admin, USER_ROLE.contentCreator]);
   });
 
   it("should handle wildcard patterns", () => {
-    const roles = findMatchingRoute("admin/users/123");
+    const roles = findMatchingRoute("dashboard/admin/users/123");
     expect(roles).toEqual([USER_ROLE.admin]);
   });
 
@@ -25,7 +25,7 @@ describe("mapNavigationItems", () => {
     const items: NavigationItem[] = [
       {
         label: "courses",
-        path: "admin/courses",
+        path: "dashboard/admin/courses",
         iconName: "Course",
       },
     ];
@@ -42,9 +42,9 @@ describe("mapNavigationItems", () => {
 
     expect(mapped[0]).toEqual({
       label: "courses",
-      path: "admin/courses",
+      path: "dashboard/admin/courses",
       iconName: "Course",
-      link: "/admin/courses",
+      link: "/dashboard/admin/courses",
       roles: [USER_ROLE.admin, USER_ROLE.contentCreator],
     });
   });
@@ -53,7 +53,7 @@ describe("mapNavigationItems", () => {
     const items: NavigationItem[] = [
       {
         label: "users",
-        path: "admin/users",
+        path: "dashboard/admin/users",
         iconName: "User",
       },
     ];
@@ -75,7 +75,7 @@ describe("mapNavigationItems", () => {
     const items: NavigationItem[] = [
       {
         label: "dashboard",
-        path: "",
+        path: "dashboard",
         iconName: "Dashboard",
       },
     ];
@@ -92,9 +92,9 @@ describe("mapNavigationItems", () => {
 
     expect(mapped[0]).toMatchObject({
       label: "dashboard",
-      path: "",
+      path: "dashboard",
       iconName: "Dashboard",
-      link: "/",
+      link: "/dashboard",
       roles: expect.any(Array),
     });
   });
