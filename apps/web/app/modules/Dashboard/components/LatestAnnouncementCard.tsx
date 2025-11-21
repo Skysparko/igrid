@@ -41,7 +41,7 @@ export default function LatestAnnouncementCard({
 
   const handleReadMore = () => {
     setIsVisible(false);
-    navigate(`/announcements`);
+    navigate(`/dashboard/announcements`);
   };
 
   const { mutate: markAsRead } = useMarkAnnouncementAsRead();

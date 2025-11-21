@@ -8,6 +8,7 @@ import {
   useRouteError,
 } from "@remix-run/react";
 
+import iGirdFavi from "./assets/iGird favi.png";
 import { PlatformFavicon } from "./components/PlatformFavicon";
 import { Toaster } from "./components/ui/toaster";
 import "./index.css";
@@ -20,9 +21,9 @@ import type { LinksFunction } from "@remix-run/node";
 
 export const links: LinksFunction = () => {
   return [
-    { rel: "icon", href: "/app-signet.svg", type: "image/svg+xml" },
-    { rel: "shortcut icon", href: "/app-signet.svg", type: "image/svg+xml" },
-    { rel: "apple-touch-icon", href: "/app-signet.svg" },
+    { rel: "icon", href: iGirdFavi, type: "image/png" },
+    { rel: "shortcut icon", href: iGirdFavi, type: "image/png" },
+    { rel: "apple-touch-icon", href: iGirdFavi },
   ];
 };
 
@@ -32,6 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Girding Minds for a Changing World. Learn with iGird." />
         <Meta />
         <Links />
       </head>

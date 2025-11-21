@@ -43,7 +43,7 @@ export function NavigationFooter({ setIsMobileNavOpen }: NavigationFooterProps) 
           item={{
             iconName: "Bell",
             label: t("navigationSideBar.announcements"),
-            link: "/announcements",
+            link: "/dashboard/announcements",
           }}
           setIsMobileNavOpen={setIsMobileNavOpen}
         />
@@ -94,7 +94,7 @@ export function NavigationFooter({ setIsMobileNavOpen }: NavigationFooterProps) 
                   item={{
                     iconName: "Info",
                     label: t("navigationSideBar.providerInformation"),
-                    link: "/provider-information",
+                    link: "/dashboard/provider-information",
                   }}
                 />
               </DropdownMenuItem>
@@ -104,7 +104,7 @@ export function NavigationFooter({ setIsMobileNavOpen }: NavigationFooterProps) 
                   item={{
                     iconName: "User",
                     label: t("navigationSideBar.profile"),
-                    link: `/profile/${user?.id}`,
+                    link: `/dashboard/profile/${user?.id}`,
                   }}
                 />
               </DropdownMenuItem>
@@ -114,7 +114,7 @@ export function NavigationFooter({ setIsMobileNavOpen }: NavigationFooterProps) 
                   item={{
                     iconName: "Settings",
                     label: t("navigationSideBar.settings"),
-                    link: `/settings`,
+                    link: `/dashboard/settings`,
                   }}
                 />
               </DropdownMenuItem>

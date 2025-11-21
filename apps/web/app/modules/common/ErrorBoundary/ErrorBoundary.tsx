@@ -31,7 +31,7 @@ const CustomErrorBoundary = ({ stack, message }: ErrorBoundaryProps) => {
           <span>{t("common.button.goBack")}</span>
         </Button>
         <Button
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/dashboard")}
           className="mt-6 rounded border border-primary bg-transparent px-4 py-2 text-primary transition-colors"
         >
           {t("common.button.goToDashboard")}

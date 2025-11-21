@@ -73,7 +73,7 @@ export default function ProviderInformationPage() {
     <PageWrapper
       role="main"
       breadcrumbs={[
-        { title: t("providerInformation.breadcrumbs.dashboard"), href: "/" },
+        { title: t("providerInformation.breadcrumbs.dashboard"), href: "/dashboard" },
         {
           title: t("providerInformation.breadcrumbs.providerInformation"),
           href: "/provider-information",

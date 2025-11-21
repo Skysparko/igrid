@@ -42,7 +42,7 @@ export function SetupMFACard() {
     verifyMFA(data.token, {
       onSuccess: () => {
         setHasVerifiedMFA(true);
-        navigate("/");
+        navigate("/dashboard");
       },
     });
   };

@@ -25,9 +25,16 @@ ApiClient.instance.interceptors.request.use((config) => {
     config.url?.includes("/forgot-password") ||
     config.url?.includes("/register");
 
-  const isSettingsGlobalEndpoint = config.url?.includes("/settings/global");
+  const isSettingsGlobalEndpoint = config.url?.includes("/dashboard/settings/global");
 
-  if (!isAuthEndpoint && !isSettingsGlobalEndpoint && !useAuthStore.getState().isLoggedIn) {
+  const isPublicCourseEndpoint = config.url?.includes("/course/available-courses");
+
+  if (
+    !isAuthEndpoint &&
+    !isSettingsGlobalEndpoint &&
+    !isPublicCourseEndpoint &&
+    !useAuthStore.getState().isLoggedIn
+  ) {
     config.signal = requestManager.controller.signal;
   }
 

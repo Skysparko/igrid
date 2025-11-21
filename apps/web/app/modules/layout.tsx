@@ -13,7 +13,7 @@ export type ParentRouteData = {
 
 export const meta: MetaFunction<typeof clientLoader> = ({ data }) => {
   const companyShortName = data?.companyInfo?.data?.companyShortName;
-  const title = companyShortName ? `${companyShortName}` : "Mentingo";
+  const title = companyShortName ? `${companyShortName}` : "iGird";
 
   return [{ title }];
 };

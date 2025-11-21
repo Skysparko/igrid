@@ -81,7 +81,7 @@ export default function LessonPage() {
         if (lessonIndex + 1 < chapter.lessons.length) {
           const nextLessonId = chapter.lessons[lessonIndex + 1].id;
           queryClient.invalidateQueries({ queryKey: ["course", { id: courseId }] });
-          navigate(`/course/${courseId}/lesson/${nextLessonId}`, {
+          navigate(`/dashboard/course/${courseId}/lesson/${nextLessonId}`, {
             state: { chapterId: chapter.id },
           });
         } else {
@@ -89,7 +89,7 @@ export default function LessonPage() {
           if (currentChapterIndex + 1 < chapters.length) {
             const nextLessonId = chapters[currentChapterIndex + 1].lessons[0].id;
             queryClient.invalidateQueries({ queryKey: ["course", { id: courseId }] });
-            navigate(`/course/${courseId}/lesson/${nextLessonId}`, {
+            navigate(`/dashboard/course/${courseId}/lesson/${nextLessonId}`, {
               state: { chapterId: chapters[currentChapterIndex + 1].id },
             });
           }
@@ -109,7 +109,7 @@ export default function LessonPage() {
       if (lessonIndex !== -1) {
         if (lessonIndex > 0) {
           const prevLessonId = chapter.lessons[lessonIndex - 1].id;
-          navigate(`/course/${courseId}/lesson/${prevLessonId}`, {
+          navigate(`/dashboard/course/${courseId}/lesson/${prevLessonId}`, {
             state: { chapterId: chapter.id },
           });
         } else {
@@ -118,7 +118,7 @@ export default function LessonPage() {
             const prevChapter = chapters[currentChapterIndex - 1];
             const prevLessonId = prevChapter.lessons[prevChapter.lessons.length - 1].id;
 
-            navigate(`/course/${courseId}/lesson/${prevLessonId}`, {
+            navigate(`/dashboard/course/${courseId}/lesson/${prevLessonId}`, {
               state: { chapterId: prevChapter.id },
             });
           }

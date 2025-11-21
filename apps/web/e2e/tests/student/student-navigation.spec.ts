@@ -47,7 +47,7 @@ test.describe("Student navigation", () => {
     await page
       .getByRole("link", { name: new RegExp(TEST_NAVIGATION.button.settings, "i") })
       .click();
-    await page.waitForURL("/settings");
+    await page.waitForURL("/dashboard/settings");
 
     const settingsHeader = page.getByRole("heading", {
       name: TEST_NAVIGATION.header.settings,

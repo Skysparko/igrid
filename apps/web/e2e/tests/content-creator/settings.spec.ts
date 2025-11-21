@@ -20,7 +20,7 @@ test.describe("Content creator settings", () => {
   test("should change content creator informations", async ({ page }) => {
     await page.getByRole("button", { name: /(avatar for|profile test)/i }).click();
     await page.getByRole("link", { name: new RegExp(TEST_SETTINGS.button.settings, "i") }).click();
-    await page.waitForURL("/settings");
+    await page.waitForURL("/dashboard/settings");
 
     await page.locator('label[for="Bio - note"] + textarea').fill(TEST_SETTINGS.description);
     await page.locator('label[for="jobTitle"] + input').fill(TEST_SETTINGS.jobTitle);

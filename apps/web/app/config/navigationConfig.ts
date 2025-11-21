@@ -40,7 +40,7 @@ export const getNavigationConfig = (
     items: [
       {
         label: t("navigationSideBar.dashboard"),
-        path: "",
+        path: "dashboard",
         iconName: "Dashboard",
       },
       {
@@ -58,29 +58,29 @@ export const getNavigationConfig = (
     items: [
       {
         label: t("navigationSideBar.announcements"),
-        path: `announcements`,
+        path: `dashboard/announcements`,
         iconName: "Bell",
       },
       {
         label: t("navigationSideBar.users"),
-        path: "admin/users",
+        path: "dashboard/admin/users",
         iconName: "Hat",
       },
       {
         label: t("navigationSideBar.groups"),
-        path: "admin/groups",
+        path: "dashboard/admin/groups",
         iconName: "Share",
       },
       {
         label: t("navigationSideBar.categories"),
-        path: "admin/categories",
+        path: "dashboard/admin/categories",
         iconName: "Category",
       },
       ...(isStripeConfigured
         ? [
             {
               label: t("navigationSideBar.promotionCodes", "Promotion Codes"),
-              path: "admin/promotion-codes",
+              path: "dashboard/admin/promotion-codes",
               iconName: "HandCoins",
             } as NavigationItem,
           ]

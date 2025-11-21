@@ -148,7 +148,7 @@ export default function ProfilePage() {
     }));
   };
 
-  if (error) return <Navigate to="/" />;
+  if (error) return <Navigate to="/dashboard" />;
 
   if (!userDetails)
     return (

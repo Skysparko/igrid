@@ -103,8 +103,9 @@ export default function LoginPage() {
       <Card className="mx-auto max-w-sm">
         <CardHeader>
           <CardTitle role="heading" className="text-2xl">
-            <div className="mb-6 flex justify-center">
+            <div className="mb-6 flex flex-col items-center gap-2">
               <PlatformLogo className="h-16 w-auto py-3" alt="Platform Logo" />
+              <p className="text-sm font-medium text-neutral-600">Learn with iGird.</p>
             </div>
             {t("loginView.header")}
           </CardTitle>

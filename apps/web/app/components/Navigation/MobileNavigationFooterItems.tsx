@@ -41,7 +41,7 @@ export const MobileNavigationFooterItems = ({
         className="col-span-1 md:col-span-2 2xl:hidden"
         item={{
           label: t("navigationSideBar.profile"),
-          link: `/profile/${userId}`,
+          link: `/dashboard/profile/${userId}`,
           iconName: "User",
         }}
         setIsMobileNavOpen={setIsMobileNavOpen}
@@ -52,7 +52,7 @@ export const MobileNavigationFooterItems = ({
         item={{
           iconName: "Settings",
           label: t("navigationSideBar.settings"),
-          link: "/settings",
+          link: "/dashboard/settings",
         }}
         setIsMobileNavOpen={setIsMobileNavOpen}
       />

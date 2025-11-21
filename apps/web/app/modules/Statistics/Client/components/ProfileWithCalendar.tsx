@@ -71,7 +71,7 @@ export const ProfileWithCalendar = ({ user, isLoading = true, streak }: ProfileW
               {user?.email}
             </a>
           </div>
-          <Link to="/settings" className="w-full">
+          <Link to="/dashboard/settings" className="w-full">
             <Button className="w-full">{t("profileWithCalendarView.button.settings")}</Button>
           </Link>
         </div>

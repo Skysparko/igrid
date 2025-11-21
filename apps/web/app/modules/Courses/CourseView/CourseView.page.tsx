@@ -11,15 +11,13 @@ import { PageWrapper } from "~/components/PageWrapper";
 import { Button } from "~/components/ui/button";
 import { Card } from "~/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { useUserRole } from "~/hooks/useUserRole";
+import { USER_ROLE } from "~/config/userRoles";
 import { cn } from "~/lib/utils";
 import CourseOverview from "~/modules/Courses/CourseView/CourseOverview";
 import { CourseViewSidebar } from "~/modules/Courses/CourseView/CourseViewSidebar/CourseViewSidebar";
 import { MoreCoursesByAuthor } from "~/modules/Courses/CourseView/MoreCoursesByAuthor";
 import { YouMayBeInterestedIn } from "~/modules/Courses/CourseView/YouMayBeInterestedIn";
 import CertificatePreview from "~/modules/Profile/Certificates/CertificatePreview";
-
-import { CoursesAccessGuard } from "../Courses.layout";
 
 import { ChapterListOverview } from "./components/ChapterListOverview";
 import { CourseAdminStatistics } from "./CourseAdminStatistics/CourseAdminStatistics";
@@ -28,8 +26,8 @@ export default function CourseViewPage() {
   const { t } = useTranslation();
   const { id = "" } = useParams();
   const { data: course } = useCourse(id);
-  const { isStudent } = useUserRole();
   const { data: currentUser } = useCurrentUser();
+  const isStudent = currentUser?.role === USER_ROLE.student;
   const { data: globalSettings } = useGlobalSettings();
 
   const [isCertificatePreviewOpen, setCertificatePreview] = useState(false);
@@ -103,91 +101,89 @@ export default function CourseViewPage() {
   const { studentName, courseName, formattedDate } = certificateInfo;
 
   return (
-    <CoursesAccessGuard>
-      <PageWrapper breadcrumbs={breadcrumbs} backButton={backButton}>
-        <div className="flex w-full max-w-full flex-col gap-6 lg:grid lg:grid-cols-[1fr_480px]">
-          <div className="flex flex-col gap-y-6 overflow-hidden">
-            <CourseOverview course={course} />
+    <PageWrapper breadcrumbs={breadcrumbs} backButton={backButton}>
+      <div className="flex w-full max-w-full flex-col gap-6 lg:grid lg:grid-cols-[1fr_480px]">
+        <div className="flex flex-col gap-y-6 overflow-hidden">
+          <CourseOverview course={course} />
 
-            {hasFinishedCourse && (
-              <Card className="px-4 py-4 md:px-8 flex items-center gap-4 bg-success-50">
-                <div className="bg-success-50 aspect-square size-10 rounded-full grid place-items-center">
-                  <Icon name="InputRoundedMarkerSuccess" className="size-4" />
-                </div>
-                <p className="body-sm-md grow">
-                  {t("studentCourseView.certificate.courseCompleted")}
-                </p>
-                <div>
-                  <Button variant="ghost" size="sm" onClick={handleOpenCertificatePreview}>
-                    <Icon name="Eye" className="size-4 mr-2" />
-                    {t("studentCourseView.certificate.button.viewCertificate")}
-                  </Button>
-                </div>
-              </Card>
-            )}
+          {hasFinishedCourse && (
+            <Card className="px-4 py-4 md:px-8 flex items-center gap-4 bg-success-50">
+              <div className="bg-success-50 aspect-square size-10 rounded-full grid place-items-center">
+                <Icon name="InputRoundedMarkerSuccess" className="size-4" />
+              </div>
+              <p className="body-sm-md grow">
+                {t("studentCourseView.certificate.courseCompleted")}
+              </p>
+              <div>
+                <Button variant="ghost" size="sm" onClick={handleOpenCertificatePreview}>
+                  <Icon name="Eye" className="size-4 mr-2" />
+                  {t("studentCourseView.certificate.button.viewCertificate")}
+                </Button>
+              </div>
+            </Card>
+          )}
 
-            <Tabs defaultValue={courseViewTabs[0].title} className="w-full">
-              <TabsList className="bg-card w-full justify-start gap-4 p-0 overflow-hidden">
-                {courseViewTabs.map((tab) => {
-                  const { title, isForAdminLike } = tab;
-
-                  if (isForAdminLike && isStudent) return null;
-
-                  return (
-                    <TabsTrigger
-                      key={title}
-                      value={title}
-                      className="flex h-full rounded-none items-center gap-1.5 data-[state=active]:shadow-none text-neutral-900 data-[state=active]:text-primary-700 data-[state=active]:border-b-2 data-[state=active]:border-b-primary-700"
-                    >
-                      <span className="body-sm">{title}</span>{" "}
-                      {tab.itemCount && (
-                        <span className="body-sm bg-neutral-200 px-2 rounded-lg">
-                          {tab.itemCount}
-                        </span>
-                      )}
-                    </TabsTrigger>
-                  );
-                })}
-              </TabsList>
+          <Tabs defaultValue={courseViewTabs[0].title} className="w-full">
+            <TabsList className="bg-card w-full justify-start gap-4 p-0 overflow-hidden">
               {courseViewTabs.map((tab) => {
-                const { title, isForAdminLike, content } = tab;
+                const { title, isForAdminLike } = tab;
 
                 if (isForAdminLike && isStudent) return null;
 
                 return (
-                  <TabsContent
+                  <TabsTrigger
                     key={title}
                     value={title}
-                    className={cn({
-                      "data-[state=active]:mt-6": true,
-                    })}
+                    className="flex h-full rounded-none items-center gap-1.5 data-[state=active]:shadow-none text-neutral-900 data-[state=active]:text-primary-700 data-[state=active]:border-b-2 data-[state=active]:border-b-primary-700"
                   >
-                    {content}
-                  </TabsContent>
+                    <span className="body-sm">{title}</span>{" "}
+                    {tab.itemCount && (
+                      <span className="body-sm bg-neutral-200 px-2 rounded-lg">
+                        {tab.itemCount}
+                      </span>
+                    )}
+                  </TabsTrigger>
                 );
               })}
-            </Tabs>
-            {isCertificatePreviewOpen && isStudent && (
-              <button
-                className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50"
-                onClick={handleCloseCertificatePreview}
-              >
-                <div>
-                  <CertificatePreview
-                    studentName={studentName}
-                    courseName={courseName}
-                    completionDate={formattedDate}
-                    onClose={handleCloseCertificatePreview}
-                    platformLogo={globalSettings?.platformLogoS3Key}
-                    certificateBackgroundImageUrl={globalSettings?.certificateBackgroundImage}
-                  />
-                </div>
-              </button>
-            )}
-          </div>
-          <CourseViewSidebar course={course} />
+            </TabsList>
+            {courseViewTabs.map((tab) => {
+              const { title, isForAdminLike, content } = tab;
+
+              if (isForAdminLike && isStudent) return null;
+
+              return (
+                <TabsContent
+                  key={title}
+                  value={title}
+                  className={cn({
+                    "data-[state=active]:mt-6": true,
+                  })}
+                >
+                  {content}
+                </TabsContent>
+              );
+            })}
+          </Tabs>
+          {isCertificatePreviewOpen && isStudent && (
+            <button
+              className="fixed inset-0 z-50 flex items-center justify-center bg-gray-900/50"
+              onClick={handleCloseCertificatePreview}
+            >
+              <div>
+                <CertificatePreview
+                  studentName={studentName}
+                  courseName={courseName}
+                  completionDate={formattedDate}
+                  onClose={handleCloseCertificatePreview}
+                  platformLogo={globalSettings?.platformLogoS3Key}
+                  certificateBackgroundImageUrl={globalSettings?.certificateBackgroundImage}
+                />
+              </div>
+            </button>
+          )}
         </div>
-      </PageWrapper>
-    </CoursesAccessGuard>
+        <CourseViewSidebar course={course} />
+      </div>
+    </PageWrapper>
   );
 }

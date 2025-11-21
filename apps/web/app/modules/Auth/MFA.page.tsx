@@ -18,7 +18,7 @@ export default function MFAPage() {
   }
 
   if (hasVerifiedMFA) {
-    return <Navigate to="/" />;
+    return <Navigate to="/dashboard" />;
   }
 
   if (isLoading || isFetching || !userSettings) {

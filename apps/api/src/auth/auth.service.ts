@@ -10,11 +10,7 @@ import {
 import { ConfigService } from "@nestjs/config";
 import { EventBus } from "@nestjs/cqrs";
 import { JwtService } from "@nestjs/jwt";
-import {
-  CreatePasswordReminderEmail,
-  PasswordRecoveryEmail,
-  WelcomeEmail,
-} from "@repo/email-templates";
+import { CreatePasswordReminderEmail, PasswordRecoveryEmail } from "@repo/email-templates";
 import * as bcrypt from "bcryptjs";
 import { and, eq, isNull, lt, lte, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
@@ -111,14 +107,14 @@ export class AuthService {
       const usersProfilePictureUrl =
         await this.userService.getUsersProfilePictureUrl(avatarReference);
 
-      const emailTemplate = new WelcomeEmail({ email, name: email });
-      await this.emailService.sendEmail({
-        to: email,
-        subject: "Welcome to our platform",
-        text: emailTemplate.text,
-        html: emailTemplate.html,
-        from: process.env.SES_EMAIL || "",
-      });
+      // const emailTemplate = new WelcomeEmail({ email, name: email });
+      // await this.emailService.sendEmail({
+      //   to: email,
+      //   subject: "Welcome to our platform",
+      //   text: emailTemplate.text,
+      //   html: emailTemplate.html,
+      //   from: process.env.SES_EMAIL || "",
+      // });
 
       this.eventBus.publish(new UserRegisteredEvent(newUser));
 
@@ -495,7 +491,7 @@ export class AuthService {
 
     return {
       secret,
-      otpauth: `otpauth://totp/Mentingo:${user.email}?secret=${secret}&issuer=Mentingo`,
+      otpauth: `otpauth://totp/iGird:${user.email}?secret=${secret}&issuer=iGird`,
     };
   }
 

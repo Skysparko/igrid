@@ -1,3 +1,4 @@
+import iGirdLogo from "~/assets/iGird logo.png";
 import { Icon } from "~/components/Icon";
 import { cn } from "~/lib/utils";
 
@@ -65,7 +66,11 @@ const CertificateContent = ({
           className={cn("aspect-auto h-8", !isModal && "scale-75 xl:scale-100")}
         />
       ) : (
-        <Icon name="AppLogo" className={cn("h-8", !isModal && "scale-75 xl:scale-100")} />
+        <img
+          src={iGirdLogo}
+          alt="Platform Logo"
+          className={cn("aspect-auto h-8", !isModal && "scale-75 xl:scale-100")}
+        />
       )}
       <div
         className={cn(

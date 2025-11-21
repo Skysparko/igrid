@@ -68,7 +68,7 @@ export const CourseViewSidebar = ({ course }: CourseViewSidebar) => {
         <span>{t("studentCourseView.sideSection.other.collapse")}</span>
       </Button>
       <Button variant="outline" asChild>
-        <Link to={`/profile/${course?.authorId}`}>
+        <Link to={`/dashboard/profile/${course?.authorId}`}>
           <span>{t("studentCourseView.sideSection.button.goToContentCreatorPage")}</span>
         </Link>
       </Button>

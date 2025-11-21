@@ -37,12 +37,15 @@ export const CourseProgress = ({ course }: CourseProgressProps) => {
 
   const handleNavigateToLesson = () => {
     if (!notStartedLessonId && !firstInProgressLessonId) {
-      return navigate(`lesson/${firstLessonId}`);
+      return navigate(`/dashboard/course/${course.id}/lesson/${firstLessonId}`);
     }
 
-    navigate(`lesson/${firstInProgressLessonId ?? notStartedLessonId}`, {
-      state: { chapterId: firstInProgressChapterId ?? notStartedChapterId },
-    });
+    navigate(
+      `/dashboard/course/${course.id}/lesson/${firstInProgressLessonId ?? notStartedLessonId}`,
+      {
+        state: { chapterId: firstInProgressChapterId ?? notStartedChapterId },
+      },
+    );
   };
 
   return (

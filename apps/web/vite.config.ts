@@ -32,10 +32,6 @@ export default defineConfig(({ mode }) => {
       viteStaticCopy({
         targets: [
           {
-            src: "app/assets/svgs/app-signet.svg",
-            dest: "",
-          },
-          {
             src: "app/locales/en/translation.json",
             dest: "locales/en",
           },
