@@ -18,7 +18,7 @@ export const meta: MetaFunction = ({ matches }) => setPageTitle(matches, "pages.
 
 export default function CreateNewCategoryPage() {
   const { form, onSubmit } = useCreateCategoryForm(({ data }) => {
-    if (data.id) navigate(`/admin/categories/${data.id}`);
+    if (data.id) navigate(`/dashboard/admin/categories/${data.id}`);
   });
   const navigate = useNavigate();
 
@@ -27,13 +27,16 @@ export default function CreateNewCategoryPage() {
   const isFormValid = form.formState.isValid;
 
   const breadcrumbs = [
-    { title: t("adminCategoriesView.breadcrumbs.categories"), href: "/admin/categories" },
-    { title: t("adminCategoriesView.breadcrumbs.createNew"), href: "/admin/categories/new" },
+    { title: t("adminCategoriesView.breadcrumbs.categories"), href: "/dashboard/admin/categories" },
+    {
+      title: t("adminCategoriesView.breadcrumbs.createNew"),
+      href: "/dashboard/admin/categories/new",
+    },
   ];
 
   const backButton = {
     title: t("adminCategoriesView.breadcrumbs.back"),
-    href: "/admin/categories",
+    href: "/dashboard/admin/categories",
   };
 
   return (

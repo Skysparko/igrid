@@ -56,18 +56,21 @@ export default function CreateNewUserPage() {
   const onSubmit = (values: FormValues) => {
     createUser({ data: values }).then(({ data }) => {
       queryClient.invalidateQueries({ queryKey: ALL_COURSES_QUERY_KEY });
-      navigate(`/admin/users/${data.id}`);
+      navigate(`/dashboard/admin/users/${data.id}`);
     });
   };
 
   const isFormValid = form.formState.isValid;
 
   const breadcrumbs = [
-    { title: t("adminUsersView.breadcrumbs.users"), href: "/admin/users" },
-    { title: t("adminUsersView.breadcrumbs.createNew"), href: "/admin/users/new" },
+    { title: t("adminUsersView.breadcrumbs.users"), href: "/dashboard/admin/users" },
+    { title: t("adminUsersView.breadcrumbs.createNew"), href: "/dashboard/admin/users/new" },
   ];
 
-  const backButton = { title: t("adminUsersView.breadcrumbs.back"), href: "/admin/users" };
+  const backButton = {
+    title: t("adminUsersView.breadcrumbs.back"),
+    href: "/dashboard/admin/users",
+  };
 
   return (
     <PageWrapper breadcrumbs={breadcrumbs} backButton={backButton}>

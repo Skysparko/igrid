@@ -225,7 +225,7 @@ const AddCourse = () => {
                 <Button
                   type="button"
                   className="rounded border-2 bg-white px-6 py-2 text-primary-800"
-                  onClick={() => navigate("/admin/courses")}
+                  onClick={() => navigate("/dashboard/admin/courses")}
                 >
                   {t("common.button.cancel")}
                 </Button>

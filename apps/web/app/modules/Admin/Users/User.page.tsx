@@ -62,11 +62,11 @@ const User = () => {
   };
 
   const breadcrumbs = [
-    { title: t("adminUserView.breadcrumbs.users"), href: "/admin/users" },
-    { title: t("adminUserView.breadcrumbs.userDetails"), href: `/admin/users/${id}` },
+    { title: t("adminUserView.breadcrumbs.users"), href: "/dashboard/admin/users" },
+    { title: t("adminUserView.breadcrumbs.userDetails"), href: `/dashboard/admin/users/${id}` },
   ];
 
-  const backButton = { title: t("adminUserView.breadcrumbs.back"), href: "/admin/users" };
+  const backButton = { title: t("adminUserView.breadcrumbs.back"), href: "/dashboard/admin/users" };
 
   return (
     <PageWrapper breadcrumbs={breadcrumbs} backButton={backButton}>

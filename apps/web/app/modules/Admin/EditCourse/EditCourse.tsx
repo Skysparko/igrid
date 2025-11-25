@@ -68,8 +68,8 @@ const EditCourse = () => {
   }
 
   const breadcrumbs = [
-    { title: t("adminCourseView.breadcrumbs.courses"), href: "/admin/courses" },
-    { title: course?.title || "", href: `/admin/beta-courses/${id}` },
+    { title: t("adminCourseView.breadcrumbs.courses"), href: "/dashboard/admin/courses" },
+    { title: course?.title || "", href: `/dashboard/admin/beta-courses/${id}` },
   ];
 
   const backButton = { title: t("adminCourseView.breadcrumbs.back") };

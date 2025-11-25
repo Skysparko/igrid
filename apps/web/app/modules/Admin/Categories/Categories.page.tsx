@@ -244,8 +244,11 @@ const Categories = () => {
   return (
     <PageWrapper
       breadcrumbs={[
-        { title: t("adminCategoriesView.breadcrumbs.dashboard"), href: "/" },
-        { title: t("adminCategoriesView.breadcrumbs.categories"), href: "/admin/categories" },
+        { title: t("adminCategoriesView.breadcrumbs.dashboard"), href: "/dashboard" },
+        {
+          title: t("adminCategoriesView.breadcrumbs.categories"),
+          href: "/dashboard/admin/categories",
+        },
       ]}
     >
       <div className="flex flex-col">

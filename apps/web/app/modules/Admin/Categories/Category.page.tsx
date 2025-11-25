@@ -65,11 +65,17 @@ const Category = () => {
   const fields = renderFields();
 
   const breadcrumbs = [
-    { title: t("adminCategoryView.breadcrumbs.categories"), href: "/admin/categories" },
-    { title: t("adminCategoryView.breadcrumbs.categoryDetails"), href: `/admin/categories/${id}` },
+    { title: t("adminCategoryView.breadcrumbs.categories"), href: "/dashboard/admin/categories" },
+    {
+      title: t("adminCategoryView.breadcrumbs.categoryDetails"),
+      href: `/dashboard/admin/categories/${id}`,
+    },
   ];
 
-  const backButton = { title: t("adminCategoryView.breadcrumbs.back"), href: "/admin/categories" };
+  const backButton = {
+    title: t("adminCategoryView.breadcrumbs.back"),
+    href: "/dashboard/admin/categories",
+  };
 
   return (
     <PageWrapper breadcrumbs={breadcrumbs} backButton={backButton}>

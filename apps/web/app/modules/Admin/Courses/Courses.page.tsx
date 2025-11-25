@@ -303,7 +303,7 @@ const Courses = () => {
   };
 
   const handleRowClick = (courseId: string) => {
-    navigate(`/admin/beta-courses/${courseId}`);
+    navigate(`/dashboard/admin/beta-courses/${courseId}`);
   };
 
   return (
@@ -311,11 +311,11 @@ const Courses = () => {
       breadcrumbs={[
         {
           title: t("adminCourseView.breadcrumbs.dashboard"),
-          href: "/",
+          href: "/dashboard",
         },
         {
           title: t("adminCourseView.breadcrumbs.courses"),
-          href: "/admin/courses",
+          href: "/dashboard/admin/courses",
         },
       ]}
     >
@@ -342,7 +342,7 @@ const Courses = () => {
             </Tooltip>
           </TooltipProvider>
 
-          <Link to="/admin/beta-courses/new">
+          <Link to="/dashboard/admin/beta-courses/new">
             <Button variant="primary">{t("adminCoursesView.button.createNew")}</Button>
           </Link>
 
@@ -357,7 +357,7 @@ const Courses = () => {
               {
                 children: <HamburgerIcon />,
                 isActive: true,
-                onClick: () => navigate("/admin/courses"),
+                onClick: () => navigate("/dashboard/admin/courses"),
               },
             ]}
           />

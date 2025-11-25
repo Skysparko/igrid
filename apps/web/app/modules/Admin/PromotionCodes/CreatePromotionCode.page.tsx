@@ -105,17 +105,20 @@ const CreatePromotionCode = () => {
   } = form;
 
   const breadcrumbs = [
-    { title: t("adminPromotionCodesView.breadcrumbs.dashboard"), href: "/" },
+    { title: t("adminPromotionCodesView.breadcrumbs.dashboard"), href: "/dashboard" },
     {
       title: t("adminPromotionCodesView.breadcrumbs.promotionCodes"),
-      href: "/admin/promotion-codes",
+      href: "/dashboard/admin/promotion-codes",
     },
-    { title: t("adminPromotionCodesView.breadcrumbs.createNew"), href: "/admin/coupons/new" },
+    {
+      title: t("adminPromotionCodesView.breadcrumbs.createNew"),
+      href: "/dashboard/admin/coupons/new",
+    },
   ];
 
   const backButton = {
     title: t("adminPromotionCodesView.breadcrumbs.back"),
-    href: "/admin/promotion-codes",
+    href: "/dashboard/admin/promotion-codes",
   };
 
   const onSubmit = (data: FormData) => {
@@ -130,7 +133,7 @@ const CreatePromotionCode = () => {
       currency: "USD",
     };
 
-    createCoupon(payload).then(() => navigate("/admin/promotion-codes"));
+    createCoupon(payload).then(() => navigate("/dashboard/admin/promotion-codes"));
   };
 
   return (

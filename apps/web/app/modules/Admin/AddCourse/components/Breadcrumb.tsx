@@ -20,7 +20,7 @@ const Breadcrumb = () => {
         <BreadcrumbLink className="body-base-md cursor-pointer text-primary-800">
           <Button
             variant="outline"
-            onClick={() => navigate("/admin/courses")}
+            onClick={() => navigate("/dashboard/admin/courses")}
             className="mr-2 w-min"
           >
             <Icon name="ChevronLeft" className="mr-2 size-3" />

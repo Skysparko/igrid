@@ -92,11 +92,11 @@ const Groups = (): ReactElement => {
       breadcrumbs={[
         {
           title: t("adminGroupsView.breadcrumbs.dashboard"),
-          href: "/",
+          href: "/dashboard",
         },
         {
           title: t("adminGroupsView.breadcrumbs.groups"),
-          href: "/admin/groups",
+          href: "/dashboard/admin/groups",
         },
       ]}
     >

@@ -32,14 +32,14 @@ const PromotionCodeDetails = () => {
   const coursesById = keyBy(courses, "stripeProductId");
 
   const breadcrumbs = [
-    { title: t("adminPromotionCodesView.breadcrumbs.dashboard"), href: "/" },
+    { title: t("adminPromotionCodesView.breadcrumbs.dashboard"), href: "/dashboard" },
     {
       title: t("adminPromotionCodesView.breadcrumbs.promotionCodes"),
-      href: "/admin/promotion-codes",
+      href: "/dashboard/admin/promotion-codes",
     },
     {
       title: t("adminPromotionCodesView.breadcrumbs.update"),
-      href: `/admin/promotion-codes/${id}`,
+      href: `/dashboard/admin/promotion-codes/${id}`,
     },
   ];
 
@@ -54,7 +54,7 @@ const PromotionCodeDetails = () => {
 
   const backButton = {
     title: t("adminPromotionCodesView.breadcrumbs.back"),
-    href: "/admin/promotion-codes",
+    href: "/dashboard/admin/promotion-codes",
   };
 
   const isCouponActive = promotionCode?.active;

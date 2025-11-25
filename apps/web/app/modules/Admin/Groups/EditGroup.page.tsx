@@ -50,7 +50,7 @@ const EditGroup = (): ReactElement => {
     try {
       await updateGroupMutation(group);
       await queryClient.invalidateQueries({ queryKey: [GROUPS_QUERY_KEY, { groupId }] });
-      navigate("/admin/groups");
+      navigate("/dashboard/admin/groups");
     } catch (error) {
       console.error(error);
     }
@@ -59,26 +59,26 @@ const EditGroup = (): ReactElement => {
   return (
     <PageWrapper
       className="flex h-full flex-col"
-      backButton={{ href: "/admin/groups", title: t("adminGroupsView.breadcrumbs.back") }}
+      backButton={{ href: "/dashboard/admin/groups", title: t("adminGroupsView.breadcrumbs.back") }}
       breadcrumbs={[
         {
           title: t("adminGroupsView.breadcrumbs.dashboard"),
-          href: "/",
+          href: "/dashboard",
         },
         {
           title: t("adminGroupsView.breadcrumbs.groups"),
-          href: "/admin/groups",
+          href: "/dashboard/admin/groups",
         },
         {
           title: t("adminGroupsView.updateGroup.header"),
-          href: "/admin/groups/new",
+          href: "/dashboard/admin/groups/new",
         },
       ]}
     >
       <GroupHeader
         title={t("adminGroupsView.updateGroup.header")}
         handlePublish={() => form.handleSubmit(handleSubmit)()}
-        handleCancel={() => navigate("/admin/groups")}
+        handleCancel={() => navigate("/dashboard/admin/groups")}
       />
       <CreateGroupCard form={form} handleSubmit={handleSubmit} />
     </PageWrapper>
