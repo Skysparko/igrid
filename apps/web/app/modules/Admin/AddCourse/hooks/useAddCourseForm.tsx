@@ -34,7 +34,7 @@ export const useAddCourseForm = () => {
       data: { ...rest, description },
     }).then(({ data }) => {
       queryClient.invalidateQueries({ queryKey: ALL_COURSES_QUERY_KEY });
-      navigate(`/admin/beta-courses/${data.id}`);
+      navigate(`/dashboard/admin/beta-courses/${data.id}`);
     });
   };
 

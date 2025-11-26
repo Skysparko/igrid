@@ -16,7 +16,7 @@ export const MyCourseEntry = ({
 
   return (
     <Link
-      to={isStudent ? `/course/${item.id}` : `/admin/beta-courses/${item.id}`}
+      to={isStudent ? `/course/${item.id}` : `/dashboard/admin/beta-courses/${item.id}`}
       onClick={onSelect}
       className="group focus:outline-none focus-visible:outline-none"
     >

@@ -50,7 +50,7 @@ export default function AnnouncementsPage() {
               </h1>
               <div className="flex items-center gap-4">
                 {isAdmin && (
-                  <Link to="/admin/announcements/new">
+                  <Link to="/dashboard/admin/announcements/new">
                     <Button variant="default">{t("announcements.page.buttons.new")}</Button>
                   </Link>
                 )}

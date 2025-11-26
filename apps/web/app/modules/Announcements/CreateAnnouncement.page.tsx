@@ -54,7 +54,7 @@ export default function AnnouncementsPage() {
             <div className="flex w-full flex-wrap items-center justify-between gap-x-4">
               <h1 className="h5 md:h3 text-neutral-950">{t("announcements.createPage.header")}</h1>
               <div className="flex items-center gap-3">
-                <Link to="/announcements">
+                <Link to="/dashboard/announcements">
                   <Button variant="outline">{t("announcements.createPage.buttons.cancel")}</Button>
                 </Link>
                 <Button variant="default" onClick={handleSubmit(onSubmit)}>

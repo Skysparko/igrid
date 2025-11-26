@@ -26,7 +26,7 @@ export default function CourseOverview({ course }: CourseOverviewProps) {
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const navigateToEditCourse = () => navigate(`/admin/beta-courses/${course.id}`);
+  const navigateToEditCourse = () => navigate(`/dashboard/admin/beta-courses/${course.id}`);
 
   return (
     <Card className="w-full border-none pt-6 drop-shadow-primary lg:pt-0">
