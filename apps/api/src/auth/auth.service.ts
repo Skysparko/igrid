@@ -10,7 +10,11 @@ import {
 import { ConfigService } from "@nestjs/config";
 import { EventBus } from "@nestjs/cqrs";
 import { JwtService } from "@nestjs/jwt";
-import { CreatePasswordReminderEmail, PasswordRecoveryEmail } from "@repo/email-templates";
+import {
+  CreatePasswordReminderEmail,
+  EmailVerificationEmail,
+  PasswordRecoveryEmail,
+} from "@repo/email-templates";
 import * as bcrypt from "bcryptjs";
 import { and, eq, isNull, lt, lte, sql } from "drizzle-orm";
 import { nanoid } from "nanoid";
@@ -26,7 +30,14 @@ import { UserRegisteredEvent } from "src/events/user/user-registered.event";
 import { SettingsService } from "src/settings/settings.service";
 import { USER_ROLES, type UserRole } from "src/user/schemas/userRoles";
 
-import { createTokens, credentials, resetTokens, userOnboarding, users } from "../storage/schema";
+import {
+  createTokens,
+  credentials,
+  emailVerificationTokens,
+  resetTokens,
+  userOnboarding,
+  users,
+} from "../storage/schema";
 import { UserService } from "../user/user.service";
 
 import { CreatePasswordService } from "./create-password.service";
@@ -81,6 +92,7 @@ export class AuthService {
           email,
           firstName,
           lastName,
+          emailVerified: false,
         })
         .returning();
 
@@ -103,18 +115,40 @@ export class AuthService {
         trx,
       );
 
+      // Generate email verification token
+      const verificationToken = nanoid(64);
+      const expiryDate = new Date();
+      expiryDate.setHours(expiryDate.getHours() + 24); // Token expires in 24 hours
+
+      await trx.insert(emailVerificationTokens).values({
+        userId: newUser.id,
+        token: verificationToken,
+        expiryDate,
+      });
+
+      // Send verification email
+      const verificationLink = `${CORS_ORIGIN}/auth/verify-email?token=${verificationToken}`;
+      const emailTemplate = new EmailVerificationEmail({
+        name: firstName,
+        verificationLink,
+      });
+
+      try {
+        await this.emailService.sendEmail({
+          to: email,
+          subject: "Verify your email address",
+          text: emailTemplate.text,
+          html: emailTemplate.html,
+          from: process.env.SES_EMAIL || "",
+        });
+      } catch (error) {
+        console.error("Failed to send verification email:", error);
+        // Don't fail registration if email sending fails
+      }
+
       const { avatarReference, ...userWithoutAvatar } = newUser;
       const usersProfilePictureUrl =
         await this.userService.getUsersProfilePictureUrl(avatarReference);
-
-      // const emailTemplate = new WelcomeEmail({ email, name: email });
-      // await this.emailService.sendEmail({
-      //   to: email,
-      //   subject: "Welcome to our platform",
-      //   text: emailTemplate.text,
-      //   html: emailTemplate.html,
-      //   from: process.env.SES_EMAIL || "",
-      // });
 
       this.eventBus.publish(new UserRegisteredEvent(newUser));
 
@@ -130,6 +164,11 @@ export class AuthService {
 
     if (user.archived) {
       throw new UnauthorizedException("Your account has been archived");
+    }
+
+    // Check if email is verified
+    if (!user.emailVerified) {
+      throw new UnauthorizedException("Please verify your email before logging in");
     }
 
     const { accessToken, refreshToken } = await this.getTokens(user);
@@ -217,6 +256,7 @@ export class AuthService {
         role: users.role,
         archived: users.archived,
         avatarReference: users.avatarReference,
+        emailVerified: users.emailVerified,
       })
       .from(users)
       .leftJoin(credentials, eq(users.id, credentials.userId))
@@ -300,6 +340,7 @@ export class AuthService {
         role: users.role,
         archived: users.archived,
         avatarReference: users.avatarReference,
+        emailVerified: users.emailVerified,
       })
       .from(users)
       .where(eq(users.id, createToken.userId));
@@ -526,5 +567,79 @@ export class AuthService {
     });
 
     return isValid;
+  }
+
+  public async verifyEmail(token: string) {
+    const [verificationToken] = await this.db
+      .select()
+      .from(emailVerificationTokens)
+      .where(eq(emailVerificationTokens.token, token));
+
+    if (!verificationToken) {
+      throw new BadRequestException("Invalid or expired verification token");
+    }
+
+    if (new Date() > verificationToken.expiryDate) {
+      // Delete expired token
+      await this.db.delete(emailVerificationTokens).where(eq(emailVerificationTokens.token, token));
+      throw new BadRequestException("Verification token has expired. Please request a new one.");
+    }
+
+    // Update user's emailVerified status
+    await this.db
+      .update(users)
+      .set({ emailVerified: true })
+      .where(eq(users.id, verificationToken.userId));
+
+    // Delete the used token
+    await this.db.delete(emailVerificationTokens).where(eq(emailVerificationTokens.token, token));
+
+    return { message: "Email verified successfully" };
+  }
+
+  public async resendVerificationEmail(email: string) {
+    const [user] = await this.db.select().from(users).where(eq(users.email, email));
+
+    if (!user) {
+      // Don't reveal if user exists or not for security
+      return { message: "If the email exists, a verification link has been sent" };
+    }
+
+    if (user.emailVerified) {
+      throw new BadRequestException("Email is already verified");
+    }
+
+    // Delete existing verification tokens for this user
+    await this.db
+      .delete(emailVerificationTokens)
+      .where(eq(emailVerificationTokens.userId, user.id));
+
+    // Generate new verification token
+    const verificationToken = nanoid(64);
+    const expiryDate = new Date();
+    expiryDate.setHours(expiryDate.getHours() + 24);
+
+    await this.db.insert(emailVerificationTokens).values({
+      userId: user.id,
+      token: verificationToken,
+      expiryDate,
+    });
+
+    // Send verification email
+    const verificationLink = `${CORS_ORIGIN}/auth/verify-email?token=${verificationToken}`;
+    const emailTemplate = new EmailVerificationEmail({
+      name: user.firstName,
+      verificationLink,
+    });
+
+    await this.emailService.sendEmail({
+      to: email,
+      subject: "Verify your email address",
+      text: emailTemplate.text,
+      html: emailTemplate.html,
+      from: process.env.SES_EMAIL || "",
+    });
+
+    return { message: "Verification email sent" };
   }
 }

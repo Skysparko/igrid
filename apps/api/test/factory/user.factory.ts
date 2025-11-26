@@ -104,6 +104,7 @@ export const createUserFactory = (db: DatabasePg) => {
       role: USER_ROLES.STUDENT,
       archived: false,
       avatarReference: null,
+      emailVerified: true,
     };
   });
 };

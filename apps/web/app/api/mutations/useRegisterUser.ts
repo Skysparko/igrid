@@ -19,10 +19,13 @@ export function useRegisterUser() {
     mutationFn: async (options: RegisterUserOptions) => {
       const response = await ApiClient.api.authControllerRegister(options.data);
 
-      return response.data;
+      return { ...response.data, email: options.data.email };
     },
-    onSuccess: () => {
-      navigate("/auth/login");
+    onSuccess: (data) => {
+      toast({
+        description: "Registration successful! Please check your email to verify your account.",
+      });
+      navigate(`/auth/verify-email-pending?email=${encodeURIComponent(data.email)}`);
     },
     onError: (error) => {
       if (error instanceof AxiosError) {

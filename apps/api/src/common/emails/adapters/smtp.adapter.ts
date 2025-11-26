@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import * as nodemailer from "nodemailer";
 
@@ -9,11 +9,13 @@ import type { Email } from "../email.interface";
 @Injectable()
 export class SmtpAdapter extends EmailAdapter {
   private transporter: nodemailer.Transporter;
+  private readonly logger = new Logger(SmtpAdapter.name);
 
   constructor(private configService: ConfigService) {
     super();
     const config = this.getNodemailerOptions();
     this.transporter = nodemailer.createTransport(config);
+    this.logger.log(`SMTP configured: ${config.host}:${config.port}`);
   }
 
   private getNodemailerOptions() {
@@ -38,6 +40,15 @@ export class SmtpAdapter extends EmailAdapter {
   }
 
   async sendMail(email: Email): Promise<void> {
-    await this.transporter.sendMail(email);
+    this.logger.log(`📧 Sending email to: ${email.to} | Subject: "${email.subject}"`);
+    try {
+      const result = await this.transporter.sendMail(email);
+      this.logger.log(
+        `✅ Email sent successfully to: ${email.to} | MessageId: ${result.messageId}`,
+      );
+    } catch (error) {
+      this.logger.error(`❌ Failed to send email to: ${email.to} | Error: ${error.message}`);
+      throw error;
+    }
   }
 }
