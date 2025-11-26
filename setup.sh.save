@@ -188,12 +188,7 @@ if [[ ! -d "$CADDY_DATA_DIR" ]] || [[ ! -d "$CADDY_DATA_DIR/certificates" ]]; th
 
     # Start Caddy in background
     (cd apps/reverse-proxy && caddy run > /dev/null 2>&1 &)
-    if [ -n "${!:-}" ]; then
-        CADDY_PID=$!
-    else
-        echo "❌ Error: Caddy failed to start, no background PID was created."
-        exit 1
-    fi
+    
 
     echo -e "  ${YELLOW}→${NC} Waiting for Caddy to initialize..."
 
