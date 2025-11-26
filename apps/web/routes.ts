@@ -12,6 +12,8 @@ export const routes: (
         route("create-new-password", "modules/Auth/CreateNewPassword.page.tsx");
         route("password-recovery", "modules/Auth/PasswordRecovery.page.tsx");
         route("mfa", "modules/Auth/MFA.page.tsx");
+        route("verify-email", "modules/Auth/VerifyEmail.page.tsx");
+        route("verify-email-pending", "modules/Auth/VerifyEmailPending.page.tsx");
       });
       route("", "modules/Navigation/NavigationWrapper.tsx", () => {
         route("", "modules/Dashboard/PublicDashboard.layout.tsx", () => {

@@ -30,6 +30,7 @@ export const users = pgTable("users", {
   avatarReference: varchar("avatar_reference", { length: 200 }),
   role: text("role").notNull().default(USER_ROLES.STUDENT),
   archived,
+  emailVerified: boolean("email_verified").notNull().default(false),
 });
 
 export const userDetails = pgTable("user_details", {
@@ -114,6 +115,19 @@ export const resetTokens = pgTable("reset_tokens", {
     .references(() => users.id, { onDelete: "cascade" })
     .notNull(),
   resetToken: text("reset_token").notNull(),
+  expiryDate: timestamp("expiry_date", {
+    precision: 3,
+    withTimezone: true,
+  }).notNull(),
+});
+
+export const emailVerificationTokens = pgTable("email_verification_tokens", {
+  ...id,
+  ...timestamps,
+  userId: uuid("user_id")
+    .references(() => users.id, { onDelete: "cascade" })
+    .notNull(),
+  token: text("token").notNull().unique(),
   expiryDate: timestamp("expiry_date", {
     precision: 3,
     withTimezone: true,

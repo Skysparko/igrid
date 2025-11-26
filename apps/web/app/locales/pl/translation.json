@@ -1247,6 +1247,55 @@
       "email": "Nieprawidłowy email"
     }
   },
+  "verifyEmailPendingView": {
+    "header": "Sprawdź swoją skrzynkę email",
+    "subHeader": "Wysłaliśmy Ci link weryfikacyjny",
+    "description": "Wysłaliśmy link weryfikacyjny na Twój adres email. Sprawdź skrzynkę odbiorczą i kliknij w link, aby zweryfikować email i dokończyć rejestrację.",
+    "didntReceive": "Nie otrzymałeś emaila? Podaj swój adres i kliknij wyślij ponownie.",
+    "field": {
+      "email": "Adres email"
+    },
+    "button": {
+      "resend": "Wyślij ponownie email weryfikacyjny",
+      "sending": "Wysyłanie...",
+      "backToLogin": "Powrót do logowania"
+    }
+  },
+  "verifyEmailView": {
+    "invalidToken": {
+      "header": "Nieprawidłowy link weryfikacyjny",
+      "description": "Link weryfikacyjny jest nieprawidłowy lub brakujący. Poproś o nowy email weryfikacyjny."
+    },
+    "confirm": {
+      "header": "Zweryfikuj swój email",
+      "description": "Kliknij poniższy przycisk, aby zweryfikować swój adres email i aktywować konto.",
+      "info": "Weryfikując swój email, potwierdzasz, że ten adres email należy do Ciebie i chcesz go używać dla swojego konta."
+    },
+    "verifying": {
+      "header": "Weryfikacja emaila",
+      "description": "Proszę czekać, weryfikujemy Twój adres email..."
+    },
+    "success": {
+      "header": "Email zweryfikowany!",
+      "description": "Twój email został pomyślnie zweryfikowany. Możesz się teraz zalogować."
+    },
+    "declined": {
+      "header": "Weryfikacja odrzucona",
+      "description": "Zdecydowałeś się nie weryfikować swojego emaila. Jeśli to była pomyłka, możesz wrócić i spróbować ponownie."
+    },
+    "error": {
+      "header": "Weryfikacja nie powiodła się",
+      "description": "Nie udało się zweryfikować Twojego emaila. Link mógł wygasnąć lub został już użyty."
+    },
+    "button": {
+      "login": "Przejdź do logowania",
+      "backToLogin": "Powrót do logowania",
+      "requestNew": "Poproś o nowy link",
+      "accept": "Zweryfikuj Email",
+      "decline": "Odrzuć",
+      "goBack": "Wróć"
+    }
+  },
   "courseChapterView": {
     "other": {
       "lesson": "Lekcja",
@@ -1798,6 +1847,8 @@
     "passwordRecovery": "Odzyskiwanie hasła",
     "login": "Logowanie",
     "createNewPassword": "Utwórz nowe hasło",
+    "verifyEmail": "Weryfikacja emaila",
+    "verifyEmailPending": "Zweryfikuj swój email",
     "createAnnouncement": "Utwórz ogłoszenie",
     "announcements": "Ogłoszenia",
     "users": "Użytkownicy",

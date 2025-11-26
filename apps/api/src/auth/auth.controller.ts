@@ -42,6 +42,13 @@ import {
   ResetPasswordBody,
   resetPasswordSchema,
 } from "./schemas/reset-password.schema";
+import {
+  ResendVerificationEmailBody,
+  resendVerificationEmailSchema,
+  VerifyEmailBody,
+  verifyEmailResponseSchema,
+  verifyEmailSchema,
+} from "./schemas/verify-email.schema";
 import { TokenService } from "./token.service";
 
 import type { Static } from "@sinclair/typebox";
@@ -199,6 +206,32 @@ export class AuthController {
   async resetPassword(@Body() data: ResetPasswordBody): Promise<BaseResponse<{ message: string }>> {
     await this.authService.resetPassword(data.resetToken, data.newPassword);
     return new BaseResponse({ message: "Password reset successfully" });
+  }
+
+  @Public()
+  @Post("verify-email")
+  @Validate({
+    request: [{ type: "body", schema: verifyEmailSchema }],
+    response: baseResponse(verifyEmailResponseSchema),
+  })
+  async verifyEmail(
+    @Body() data: VerifyEmailBody,
+  ): Promise<BaseResponse<Static<typeof verifyEmailResponseSchema>>> {
+    const result = await this.authService.verifyEmail(data.token);
+    return new BaseResponse(result);
+  }
+
+  @Public()
+  @Post("resend-verification-email")
+  @Validate({
+    request: [{ type: "body", schema: resendVerificationEmailSchema }],
+    response: baseResponse(verifyEmailResponseSchema),
+  })
+  async resendVerificationEmail(
+    @Body() data: ResendVerificationEmailBody,
+  ): Promise<BaseResponse<Static<typeof verifyEmailResponseSchema>>> {
+    const result = await this.authService.resendVerificationEmail(data.email);
+    return new BaseResponse(result);
   }
 
   @Public()

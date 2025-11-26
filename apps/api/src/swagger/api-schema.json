@@ -169,6 +169,60 @@
         }
       }
     },
+    "/api/auth/verify-email": {
+      "post": {
+        "operationId": "AuthController_verifyEmail",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerifyEmailBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyEmailResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/resend-verification-email": {
+      "post": {
+        "operationId": "AuthController_resendVerificationEmail",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResendVerificationEmailBody"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResendVerificationEmailResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/auth/google": {
       "get": {
         "operationId": "AuthController_googleAuth",
@@ -4937,6 +4991,9 @@
               "archived": {
                 "type": "boolean"
               },
+              "emailVerified": {
+                "type": "boolean"
+              },
               "profilePictureUrl": {
                 "anyOf": [
                   {
@@ -4957,6 +5014,7 @@
               "lastName",
               "role",
               "archived",
+              "emailVerified",
               "profilePictureUrl"
             ]
           }
@@ -5016,6 +5074,9 @@
               "archived": {
                 "type": "boolean"
               },
+              "emailVerified": {
+                "type": "boolean"
+              },
               "profilePictureUrl": {
                 "anyOf": [
                   {
@@ -5086,6 +5147,7 @@
               "lastName",
               "role",
               "archived",
+              "emailVerified",
               "profilePictureUrl",
               "shouldVerifyMFA",
               "onboardingStatus"
@@ -5132,6 +5194,9 @@
               "archived": {
                 "type": "boolean"
               },
+              "emailVerified": {
+                "type": "boolean"
+              },
               "profilePictureUrl": {
                 "anyOf": [
                   {
@@ -5202,6 +5267,7 @@
               "lastName",
               "role",
               "archived",
+              "emailVerified",
               "profilePictureUrl",
               "shouldVerifyMFA",
               "onboardingStatus"
@@ -5330,6 +5396,68 @@
         "required": [
           "newPassword",
           "resetToken"
+        ]
+      },
+      "VerifyEmailBody": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "token"
+        ]
+      },
+      "VerifyEmailResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "message"
+            ]
+          }
+        },
+        "required": [
+          "data"
+        ]
+      },
+      "ResendVerificationEmailBody": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "format": "email",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      },
+      "ResendVerificationEmailResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "message"
+            ]
+          }
+        },
+        "required": [
+          "data"
         ]
       },
       "MFASetupResponse": {
@@ -5790,6 +5918,9 @@
                     "archived": {
                       "type": "boolean"
                     },
+                    "emailVerified": {
+                      "type": "boolean"
+                    },
                     "profilePictureUrl": {
                       "anyOf": [
                         {
@@ -5810,6 +5941,7 @@
                     "lastName",
                     "role",
                     "archived",
+                    "emailVerified",
                     "profilePictureUrl"
                   ]
                 },
@@ -5907,6 +6039,9 @@
               "archived": {
                 "type": "boolean"
               },
+              "emailVerified": {
+                "type": "boolean"
+              },
               "profilePictureUrl": {
                 "anyOf": [
                   {
@@ -5948,6 +6083,7 @@
               "lastName",
               "role",
               "archived",
+              "emailVerified",
               "profilePictureUrl",
               "groupId",
               "groupName"
@@ -6147,6 +6283,9 @@
               "archived": {
                 "type": "boolean"
               },
+              "emailVerified": {
+                "type": "boolean"
+              },
               "profilePictureUrl": {
                 "anyOf": [
                   {
@@ -6167,6 +6306,7 @@
               "lastName",
               "role",
               "archived",
+              "emailVerified",
               "profilePictureUrl"
             ]
           }
@@ -6292,6 +6432,9 @@
               "archived": {
                 "type": "boolean"
               },
+              "emailVerified": {
+                "type": "boolean"
+              },
               "profilePictureUrl": {
                 "anyOf": [
                   {
@@ -6312,6 +6455,7 @@
               "lastName",
               "role",
               "archived",
+              "emailVerified",
               "profilePictureUrl"
             ]
           }
@@ -15300,6 +15444,9 @@
                       "archived": {
                         "type": "boolean"
                       },
+                      "emailVerified": {
+                        "type": "boolean"
+                      },
                       "profilePictureUrl": {
                         "anyOf": [
                           {
@@ -15320,6 +15467,7 @@
                       "lastName",
                       "role",
                       "archived",
+                      "emailVerified",
                       "profilePictureUrl"
                     ]
                   }
@@ -15421,6 +15569,9 @@
                     "archived": {
                       "type": "boolean"
                     },
+                    "emailVerified": {
+                      "type": "boolean"
+                    },
                     "profilePictureUrl": {
                       "anyOf": [
                         {
@@ -15441,6 +15592,7 @@
                     "lastName",
                     "role",
                     "archived",
+                    "emailVerified",
                     "profilePictureUrl"
                   ]
                 }
@@ -15517,6 +15669,9 @@
                       "archived": {
                         "type": "boolean"
                       },
+                      "emailVerified": {
+                        "type": "boolean"
+                      },
                       "profilePictureUrl": {
                         "anyOf": [
                           {
@@ -15537,6 +15692,7 @@
                       "lastName",
                       "role",
                       "archived",
+                      "emailVerified",
                       "profilePictureUrl"
                     ]
                   }

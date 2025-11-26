@@ -1,6 +1,8 @@
 import { emailTemplateFactory } from "./email-factory";
 import CreatePasswordReminderEmailTemplate from "./templates/CreatePasswordReminderEmail";
 export const CreatePasswordReminderEmail = emailTemplateFactory(CreatePasswordReminderEmailTemplate);
+import EmailVerificationEmailTemplate from "./templates/EmailVerificationEmail";
+export const EmailVerificationEmail = emailTemplateFactory(EmailVerificationEmailTemplate);
 import FinishedCourseEmailTemplate from "./templates/FinishedCourseEmail";
 export const FinishedCourseEmail = emailTemplateFactory(FinishedCourseEmailTemplate);
 import NewUserEmailTemplate from "./templates/NewUserEmail";

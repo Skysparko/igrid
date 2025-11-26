@@ -23,7 +23,9 @@ ApiClient.instance.interceptors.request.use((config) => {
     config.url?.includes("/login") ||
     config.url?.includes("/refresh") ||
     config.url?.includes("/forgot-password") ||
-    config.url?.includes("/register");
+    config.url?.includes("/register") ||
+    config.url?.includes("/verify-email") ||
+    config.url?.includes("/resend-verification-email");
 
   const isSettingsGlobalEndpoint = config.url?.includes("/dashboard/settings/global");
 
