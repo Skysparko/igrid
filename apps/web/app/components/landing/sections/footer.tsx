@@ -51,7 +51,7 @@ export default function Footer() {
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
       <div className="max-w-7xl mx-auto py-12 px-4">
-        <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mb-8">
+        <div className="grid md:grid-cols-3 gap-8 mb-8">
           {footerSections.map((section, index) => (
             <div key={index}>
               <h3 className="font-semibold text-gray-900 mb-4">{section.title}</h3>
@@ -69,23 +69,6 @@ export default function Footer() {
               </ul>
             </div>
           ))}
-          <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Get the App</h3>
-            <div className="space-y-3">
-              <button className="w-full bg-black text-white rounded-lg px-4 py-3 text-sm font-medium hover:bg-gray-800 transition-colors">
-                Download on the App Store
-              </button>
-              <button className="w-full bg-black text-white rounded-lg px-4 py-3 text-sm font-medium hover:bg-gray-800 transition-colors">
-                GET IT ON Google Play
-              </button>
-            </div>
-            <div className="mt-6">
-              <div className="text-xs text-gray-600 mb-2">Certified B Corporation</div>
-              <div className="w-12 h-12 border-2 border-black rounded-full flex items-center justify-center">
-                <span className="text-xl font-bold">B</span>
-              </div>
-            </div>
-          </div>
         </div>
         <div className="border-t border-gray-300 pt-6 flex flex-col md:flex-row justify-between items-center">
           <span className="text-sm text-gray-600 mb-4 md:mb-0">
