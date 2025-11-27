@@ -28,12 +28,9 @@ export default function Header() {
         <Link
           to="/"
           title="brand-logo"
-          className="relative mr-4 md:mr-6 flex items-center space-x-2 flex-shrink-0"
+          className="relative mr-4 md:mr-6 flex items-center flex-shrink-0"
         >
           <PlatformLogo variant="full" className="h-8 w-auto" alt="iGird Logo" />
-          <span className="font-bold text-lg md:text-xl text-gray-900 hidden sm:inline">
-            {siteConfig.name}
-          </span>
         </Link>
 
         <div className="hidden lg:flex items-center flex-1 max-w-xl mx-4">
