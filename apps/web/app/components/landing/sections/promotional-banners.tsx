@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { ChevronRight } from "lucide-react";
 
 import { Button } from "~/components/ui/button";
@@ -16,9 +17,11 @@ export default function PromotionalBanners() {
             <p className="text-blue-100 mb-6 text-base md:text-lg">
               Get access to 10,000+ programs from leading institutions and companies.
             </p>
-            <Button className="bg-white text-blue-600 hover:bg-blue-50 font-semibold text-sm md:text-base">
-              Save on iGird Plus <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Link to="/auth/register">
+              <Button className="bg-white text-blue-600 hover:bg-blue-50 font-semibold text-sm md:text-base">
+                Save on iGird Plus <ChevronRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
             <div className="mt-6 flex items-center gap-4">
               <div className="text-sm">
                 <span className="line-through text-blue-200">₹13,999</span>
@@ -46,9 +49,11 @@ export default function PromotionalBanners() {
             <p className="text-purple-100 mb-6 text-base md:text-lg">
               Explore AI, machine learning, and data science with expert-led online programs.
             </p>
-            <Button className="bg-white text-purple-600 hover:bg-purple-50 font-semibold text-sm md:text-base">
-              Start Your AI Course <ChevronRight className="ml-2 h-4 w-4" />
-            </Button>
+            <Link to="/courses">
+              <Button className="bg-white text-purple-600 hover:bg-purple-50 font-semibold text-sm md:text-base">
+                Start Your AI Course <ChevronRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
             <div className="mt-6 flex gap-3 flex-wrap">
               <div className="text-xs text-purple-200">Microsoft</div>
               <div className="text-xs text-purple-200">IBM</div>
