@@ -49,7 +49,7 @@ describe.skip("Courses page", () => {
 
         const buttonText = course.enrolled ? "Continue" : "Enroll";
         expect(within(card).getByRole("button")).toHaveTextContent(buttonText);
-        expect(card).toHaveAttribute("href", `/course/${course.id}`);
+        expect(card).toHaveAttribute("href", `/dashboard/course/${course.id}`);
       });
     });
   });
@@ -71,7 +71,7 @@ describe.skip("Courses page", () => {
 
         const buttonText = course.enrolled ? "Continue" : "Enroll";
         expect(within(card).getByRole("button")).toHaveTextContent(buttonText);
-        expect(card).toHaveAttribute("href", `/course/${course.id}`);
+        expect(card).toHaveAttribute("href", `/dashboard/course/${course.id}`);
       });
     });
 
