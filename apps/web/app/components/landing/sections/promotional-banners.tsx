@@ -24,8 +24,8 @@ export default function PromotionalBanners() {
             </Link>
             <div className="mt-6 flex items-center gap-4">
               <div className="text-sm">
-                <span className="line-through text-blue-200">₹13,999</span>
-                <span className="ml-2 text-xl md:text-2xl font-bold">₹7,999</span>
+                <span className="line-through text-blue-200">$13,999</span>
+                <span className="ml-2 text-xl md:text-2xl font-bold">$7,999</span>
                 <span className="text-blue-200">/year</span>
               </div>
             </div>

@@ -15,7 +15,7 @@ export default function CareerPaths() {
     {
       title: "Data Scientist",
       description: "Analyzes large datasets to extract insights",
-      salary: "₹493,271",
+      salary: "$493,271",
       jobs: "23,492",
       icon: <Zap className="h-8 w-8 text-yellow-500" />,
       gradient: "from-yellow-400 to-blue-500",
@@ -23,7 +23,7 @@ export default function CareerPaths() {
     {
       title: "Business Intelligence Analyst",
       description: "Analyzes and visualizes data",
-      salary: "₹958,188",
+      salary: "$958,188",
       jobs: "78,973",
       icon: <BarChart3 className="h-8 w-8 text-blue-500" />,
       gradient: "from-yellow-400 to-blue-500",
@@ -31,7 +31,7 @@ export default function CareerPaths() {
     {
       title: "Cyber Security Analyst",
       description: "Monitors IT systems, analyzes threats",
-      salary: "₹1,257,500",
+      salary: "$1,257,500",
       jobs: "2,373",
       icon: <Shield className="h-8 w-8 text-blue-500" />,
       gradient: "from-blue-400 to-white",
@@ -39,7 +39,7 @@ export default function CareerPaths() {
     {
       title: "Data Analyst",
       description: "Collects, cleans, and interprets data",
-      salary: "₹303,299",
+      salary: "$303,299",
       jobs: "26,461",
       icon: <TrendingUp className="h-8 w-8 text-yellow-500" />,
       gradient: "from-yellow-400 to-blue-500",
@@ -47,7 +47,7 @@ export default function CareerPaths() {
     {
       title: "Content Creator",
       description: "Produces various content formats",
-      salary: "₹450,000",
+      salary: "$450,000",
       jobs: "15,234",
       icon: <PenTool className="h-8 w-8 text-pink-500" />,
       gradient: "from-blue-400 to-white",
