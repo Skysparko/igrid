@@ -1,6 +1,6 @@
 export const OPENAI_MODELS = {
-  BASIC: "gpt-4.1-mini",
-  EMBEDDING: "text-embedding-3-small",
+  BASIC: process.env.OLLAMA_MODEL || "qwen2.5:0.5b",
+  EMBEDDING: process.env.OLLAMA_EMBEDDING || "nomic-embed-text",
 } as const;
 
 export type OpenAIModels = (typeof OPENAI_MODELS)[keyof typeof OPENAI_MODELS];

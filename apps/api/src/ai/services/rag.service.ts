@@ -1,21 +1,17 @@
-import { createOpenAI } from "@ai-sdk/openai";
 import { Injectable } from "@nestjs/common";
 import { embed } from "ai";
+import { createOllama } from "ollama-ai-provider";
 
 import { CHUNK_NEIGHBOURS, TOP_K_EMBEDDINGS } from "src/ai/ai.constants";
 import { RagRepository } from "src/ai/repositories/rag.repository";
 import { MESSAGE_ROLE, OPENAI_MODELS } from "src/ai/utils/ai.type";
-import { EnvService } from "src/env/services/env.service";
 
 import type { MessageRole } from "src/ai/utils/ai.type";
 import type { UUIDType } from "src/common";
 
 @Injectable()
 export class RagService {
-  constructor(
-    private readonly ragRepository: RagRepository,
-    private readonly envService: EnvService,
-  ) {}
+  constructor(private readonly ragRepository: RagRepository) {}
 
   async getContext(
     content: string,
@@ -64,11 +60,8 @@ export class RagService {
   }
 
   async getOpenAI() {
-    return createOpenAI({
-      apiKey: await this.envService
-        .getEnv("OPENAI_API_KEY")
-        .then((r) => r.value)
-        .catch(() => process.env.OPENAI_API_KEY),
+    return createOllama({
+      baseURL: process.env.OLLAMA_BASE_URL || "http://localhost:11434/api",
     });
   }
 }
