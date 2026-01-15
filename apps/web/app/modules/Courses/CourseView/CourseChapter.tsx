@@ -51,7 +51,7 @@ export const CourseChapter = ({ chapter, courseId, isEnrolled }: CourseChapterPr
 
     const lessonToPlay = firstInProgressLesson ?? firstNotStartedLesson ?? chapter.lessons[0].id;
 
-    return navigate(`lesson/${lessonToPlay}`);
+    return navigate(`/dashboard/course/${courseId}/lesson/${lessonToPlay}`);
   };
 
   return (
@@ -116,7 +116,7 @@ export const CourseChapter = ({ chapter, courseId, isEnrolled }: CourseChapterPr
                   if (!lesson) return null;
 
                   return chapter.isFreemium || isEnrolled ? (
-                    <Link to={`/course/${courseId}/lesson/${lesson.id}`}>
+                    <Link to={`/dashboard/course/${courseId}/lesson/${lesson.id}`}>
                       <CourseChapterLesson key={lesson.id} lesson={lesson} />
                     </Link>
                   ) : (

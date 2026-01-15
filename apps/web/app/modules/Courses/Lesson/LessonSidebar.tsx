@@ -123,7 +123,7 @@ export const LessonSidebar = ({ course, lessonId }: LessonSidebarProps) => {
                               to={
                                 status === LESSON_PROGRESS_STATUSES.BLOCKED
                                   ? "#"
-                                  : `/course/${course.id}/lesson/${id}`
+                                  : `/dashboard/course/${course.id}/lesson/${id}`
                               }
                               className={cn("flex gap-x-4 px-6 py-2 hover:bg-neutral-50", {
                                 "cursor-not-allowed": status === LESSON_PROGRESS_STATUSES.BLOCKED,
