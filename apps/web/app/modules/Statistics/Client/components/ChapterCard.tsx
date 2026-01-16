@@ -63,7 +63,7 @@ export const ChapterCard = (
   );
   const { t } = useTranslation();
 
-  const hrefToLessonPage = `course/${chapterDetails.courseId}/lesson/${chapterDetails.lessonId}`;
+  const hrefToLessonPage = `/dashboard/course/${chapterDetails.courseId}/lesson/${chapterDetails.lessonId}`;
 
   return (
     <Card className={cardClasses}>
