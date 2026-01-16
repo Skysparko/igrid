@@ -26,12 +26,12 @@ services:
     #   OLLAMA_NUM_GPU: "1"
     # With 126GB VRAM, you can run larger models or multiple models
     # Consider using larger models like llama3:70b or multiple instances
-  healthcheck:
-    test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:11434/api/tags || exit 1"]
-    interval: 30s
-    timeout: 10s
-    retries: 5
-    start_period: 120s
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:11434/api/tags || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 120s
 
   api:
     build:
