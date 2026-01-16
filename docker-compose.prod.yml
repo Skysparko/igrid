@@ -7,15 +7,17 @@ services:
       - "11434:11434"
     volumes:
       - ollama-data:/root/.ollama
-    # GPU support enabled for NVIDIA GPU (126GB VRAM)
-    # With this much VRAM, you can run multiple large models simultaneously
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+    # GPU support for NVIDIA GPU (126GB VRAM)
+    # To enable GPU: Uncomment the 'deploy' section below and install NVIDIA Container Toolkit
+    # To disable GPU: Keep 'deploy' section commented (will run in CPU mode, slower)
+    # Install NVIDIA Container Toolkit: See GPU-SETUP.md or run scripts/install-nvidia-container-toolkit.sh
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - driver: nvidia
+    #           count: 1
+    #           capabilities: [gpu]
     # Optional environment variables (uncomment if needed):
     # environment:
     #   # Set CUDA_VISIBLE_DEVICES if you have multiple GPUs
