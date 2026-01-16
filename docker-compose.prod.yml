@@ -1,4 +1,36 @@
 services:
+  ollama:
+    image: ollama/ollama:latest
+    container_name: mentingo-ollama
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    # GPU support enabled for NVIDIA GPU (126GB VRAM)
+    # With this much VRAM, you can run multiple large models simultaneously
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    # Optional environment variables (uncomment if needed):
+    # environment:
+    #   # Set CUDA_VISIBLE_DEVICES if you have multiple GPUs
+    #   CUDA_VISIBLE_DEVICES: "0"
+    #   # Set OLLAMA_NUM_GPU to use multiple GPUs
+    #   OLLAMA_NUM_GPU: "1"
+    # With 126GB VRAM, you can run larger models or multiple models
+    # Consider using larger models like llama3:70b or multiple instances
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
   api:
     build:
       context: .
@@ -11,8 +43,14 @@ services:
     ports:
       - "3001:3000"
     depends_on:
-      - db
-      - redis
+      ollama:
+        condition: service_healthy
+      db:
+        condition: service_started
+      redis:
+        condition: service_started
+    # OLLAMA_BASE_URL should be set to http://ollama:11434/api in .env.api
+    # This uses Docker's internal networking (service name)
 
   db:
     image: pgvector/pgvector:pg16
@@ -42,3 +80,5 @@ services:
 
 volumes:
   db-data:
+  ollama-data:
+    driver: local
