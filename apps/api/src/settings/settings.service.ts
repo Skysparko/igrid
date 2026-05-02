@@ -401,7 +401,7 @@ export class SettingsService {
       .from(settings)
       .where(isNull(settings.userId));
 
-    return companyInformation;
+    return companyInformation ?? {};
   }
 
   public async updateCompanyInformation(

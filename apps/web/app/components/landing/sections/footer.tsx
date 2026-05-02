@@ -1,66 +1,101 @@
 import { Link } from "@remix-run/react";
-import { Facebook, Linkedin, Twitter, Youtube, Instagram } from "lucide-react";
+import { Facebook, Linkedin, Twitter, Youtube, Instagram, Mail } from "lucide-react";
 
+import { PlatformLogo } from "~/components/PlatformLogo";
 import { siteConfig } from "~/lib/landing-config";
 
-export default function Footer() {
-  const footerSections = [
-    {
-      title: "iGird",
-      links: [
-        { text: "About", href: "#" },
-        { text: "What We Offer", href: "#" },
-        { text: "Leadership", href: "#" },
-        { text: "Careers", href: "#" },
-        { text: "Catalog", href: "/courses" },
-        { text: "iGird Plus", href: "#" },
-        { text: "Professional Certificates", href: "#" },
-        { text: "Degrees", href: "#" },
-        { text: "For Enterprise", href: "#" },
-        { text: "For Government", href: "#" },
-        { text: "For Campus", href: "#" },
-        { text: "Become a Partner", href: "#" },
-        { text: "Free Courses", href: "/courses" },
-      ],
-    },
-    {
-      title: "Community",
-      links: [
-        { text: "Learners", href: "#" },
-        { text: "Partners", href: "#" },
-        { text: "Blog", href: "#" },
-        { text: "Tech Blog", href: "#" },
-      ],
-    },
-    {
-      title: "More",
-      links: [
-        { text: "Press", href: "#" },
-        { text: "Investors", href: "#" },
-        { text: "Terms", href: "#" },
-        { text: "Privacy", href: "#" },
-        { text: "Help", href: "#" },
-        { text: "Accessibility", href: "#" },
-        { text: "Contact", href: "#" },
-        { text: "Affiliates", href: "#" },
-        { text: "Manage Cookie Preferences", href: "#" },
-      ],
-    },
-  ];
+const columns = [
+  {
+    title: "Platform",
+    links: [
+      { text: "Features", href: "#features" },
+      { text: "Pricing", href: "#pricing" },
+      { text: "Browse Courses", href: "/courses" },
+      { text: "White Label", href: "#white-label" },
+      { text: "Enterprise", href: "#" },
+      { text: "Documentation", href: "#" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { text: "About Us", href: "#" },
+      { text: "Careers", href: "#" },
+      { text: "Blog", href: "#" },
+      { text: "Press", href: "#" },
+      { text: "Partners", href: "#" },
+      { text: "Contact", href: "#" },
+    ],
+  },
+  {
+    title: "Resources",
+    links: [
+      { text: "Help Center", href: "#" },
+      { text: "Community", href: "#" },
+      { text: "Status", href: "#" },
+      { text: "Accessibility", href: "#" },
+      { text: "Affiliates", href: "#" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { text: "Terms of Service", href: "#" },
+      { text: "Privacy Policy", href: "#" },
+      { text: "Cookie Policy", href: "#" },
+      { text: "Security", href: "#" },
+    ],
+  },
+];
 
+const socialLinks = [
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Linkedin, href: "#", label: "LinkedIn" },
+  { icon: Youtube, href: "#", label: "YouTube" },
+  { icon: Instagram, href: "#", label: "Instagram" },
+  { icon: Facebook, href: "#", label: "Facebook" },
+];
+
+export default function Footer() {
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto py-12 px-4">
-        <div className="grid md:grid-cols-3 gap-8 mb-8">
-          {footerSections.map((section, index) => (
-            <div key={index}>
-              <h3 className="font-semibold text-gray-900 mb-4">{section.title}</h3>
-              <ul className="space-y-2">
-                {section.links.map((link, linkIndex) => (
-                  <li key={linkIndex}>
+    <footer className="bg-gray-950 text-gray-400">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+        {/* Top row: brand + columns */}
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-10 mb-12">
+          {/* Brand column */}
+          <div className="col-span-2">
+            <Link to="/" className="inline-block mb-4">
+              <PlatformLogo
+                variant="full"
+                className="h-8 w-auto brightness-0 invert opacity-90"
+                alt="iGird"
+              />
+            </Link>
+            <p className="text-sm text-gray-500 leading-relaxed mb-5 max-w-xs">
+              The modern learning management platform for organizations, educators, and learners
+              worldwide.
+            </p>
+            <Link
+              to="mailto:support@igird.com"
+              className="inline-flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+            >
+              <Mail className="h-4 w-4" />
+              support@igird.com
+            </Link>
+          </div>
+
+          {/* Link columns */}
+          {columns.map((col) => (
+            <div key={col.title}>
+              <h3 className="text-xs font-semibold text-white uppercase tracking-widest mb-4">
+                {col.title}
+              </h3>
+              <ul className="space-y-2.5">
+                {col.links.map((link) => (
+                  <li key={link.text}>
                     <Link
                       to={link.href}
-                      className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+                      className="text-sm text-gray-500 hover:text-gray-200 transition-colors"
                     >
                       {link.text}
                     </Link>
@@ -70,26 +105,25 @@ export default function Footer() {
             </div>
           ))}
         </div>
-        <div className="border-t border-gray-300 pt-6 flex flex-col md:flex-row justify-between items-center">
-          <span className="text-sm text-gray-600 mb-4 md:mb-0">
+
+        {/* Divider */}
+        <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-gray-600 order-2 md:order-1">
             © {new Date().getFullYear()} {siteConfig.name} Inc. All rights reserved.
-          </span>
-          <div className="flex gap-4">
-            <Link to="#" className="text-gray-600 hover:text-gray-900">
-              <Facebook className="h-5 w-5" />
-            </Link>
-            <Link to="#" className="text-gray-600 hover:text-gray-900">
-              <Linkedin className="h-5 w-5" />
-            </Link>
-            <Link to="#" className="text-gray-600 hover:text-gray-900">
-              <Twitter className="h-5 w-5" />
-            </Link>
-            <Link to="#" className="text-gray-600 hover:text-gray-900">
-              <Youtube className="h-5 w-5" />
-            </Link>
-            <Link to="#" className="text-gray-600 hover:text-gray-900">
-              <Instagram className="h-5 w-5" />
-            </Link>
+          </p>
+
+          {/* Social icons */}
+          <div className="flex items-center gap-4 order-1 md:order-2">
+            {socialLinks.map(({ icon: Icon, href, label }) => (
+              <Link
+                key={label}
+                to={href}
+                aria-label={label}
+                className="h-8 w-8 flex items-center justify-center rounded-lg bg-white/5 hover:bg-white/10 text-gray-500 hover:text-gray-200 transition-all"
+              >
+                <Icon className="h-4 w-4" />
+              </Link>
+            ))}
           </div>
         </div>
       </div>

@@ -1,32 +1,46 @@
-export default function Partners() {
-  const partners = [
-    "Google",
-    "Microsoft",
-    "IBM",
-    "Stanford",
-    "Meta",
-    "Adobe",
-    "DeepLearning.AI",
-    "University of Michigan",
-    "Vanderbilt",
-  ];
+import { motion } from "motion/react";
 
+const partners = [
+  { name: "Google", abbr: "G" },
+  { name: "Microsoft", abbr: "Ms" },
+  { name: "IBM", abbr: "IBM" },
+  { name: "Stanford", abbr: "Su" },
+  { name: "Meta", abbr: "M" },
+  { name: "Adobe", abbr: "Ae" },
+  { name: "DeepLearning.AI", abbr: "DL" },
+  { name: "MIT", abbr: "MIT" },
+  { name: "Vanderbilt", abbr: "Vu" },
+];
+
+export default function Partners() {
   return (
-    <section className="py-12 px-4 bg-white">
+    <section className="border-y border-gray-100 bg-gray-50/60 py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-xl md:text-2xl font-semibold text-center mb-8 text-gray-900">
-          Learn from 350+ leading universities and companies
-        </h2>
-        <div className="flex flex-wrap justify-center items-center gap-6 md:gap-8 lg:gap-12">
-          {partners.map((partner, index) => (
+        <motion.p
+          className="text-center text-sm font-medium text-gray-400 uppercase tracking-widest mb-8"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          Trusted by learners from 350+ world-class institutions
+        </motion.p>
+        <motion.div
+          className="flex flex-wrap justify-center items-center gap-x-10 gap-y-5"
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          {partners.map((partner) => (
             <div
-              key={index}
-              className="text-gray-400 font-semibold text-lg hover:text-gray-600 transition-colors"
+              key={partner.name}
+              className="text-gray-300 font-bold text-lg sm:text-xl tracking-tight hover:text-gray-500 transition-colors duration-200 select-none"
             >
-              {partner}
+              {partner.name}
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

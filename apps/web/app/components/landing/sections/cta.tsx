@@ -1,32 +1,73 @@
 import { Link } from "@remix-run/react";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { motion } from "motion/react";
 
-import Section from "~/components/landing/section";
 import { Button } from "~/components/ui/button";
-import { siteConfig } from "~/lib/landing-config";
 
 export default function CTA() {
   return (
-    <Section className="bg-primary text-primary-foreground">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold mb-4">Ready to Start Learning?</h2>
-        <p className="text-lg mb-8 opacity-90">{siteConfig.tagline}</p>
-        <div className="flex gap-4 justify-center">
-          <Link to="/auth/register">
-            <Button variant="secondary" size="lg">
-              Get Started for Free
-            </Button>
-          </Link>
-          <Link to="/courses">
-            <Button
-              variant="outline"
-              size="lg"
-              className="bg-transparent border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10"
-            >
-              Browse Courses
-            </Button>
-          </Link>
-        </div>
+    <section id="cta" className="py-24 sm:py-32 bg-white">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <motion.div
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 px-8 py-16 sm:px-16 sm:py-20 text-center shadow-2xl"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
+          {/* Background decorations */}
+          <div className="pointer-events-none absolute inset-0 overflow-hidden">
+            <div className="absolute -top-24 -right-24 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
+            <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
+          </div>
+
+          <div className="relative">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/20 border border-white/30 px-4 py-1.5 text-sm font-medium text-white mb-6">
+              <Sparkles className="h-3.5 w-3.5" />
+              Start Learning Today
+            </div>
+
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
+              Ready to Transform Your Learning?
+            </h2>
+            <p className="text-lg text-blue-100 max-w-2xl mx-auto mb-10 leading-relaxed">
+              Join over 50,000 learners and hundreds of organizations already growing with iGird.
+              Free to get started — no credit card required.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/auth/register">
+                <Button
+                  size="lg"
+                  className="bg-white text-blue-700 hover:bg-blue-50 px-8 h-12 font-semibold shadow-lg gap-2"
+                >
+                  Get Started for Free
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </Link>
+              <Link to="/courses">
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="bg-transparent border-white/40 text-white hover:bg-white/10 px-8 h-12 font-medium"
+                >
+                  Browse Courses
+                </Button>
+              </Link>
+            </div>
+
+            <p className="mt-6 text-sm text-blue-200">
+              Need a custom solution?{" "}
+              <Link
+                to="mailto:sales@igird.com"
+                className="underline underline-offset-2 hover:text-white transition-colors"
+              >
+                Contact our sales team
+              </Link>
+            </p>
+          </div>
+        </motion.div>
       </div>
-    </Section>
+    </section>
   );
 }

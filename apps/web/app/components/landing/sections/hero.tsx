@@ -1,146 +1,145 @@
 import { Link } from "@remix-run/react";
+import { ArrowRight, BookOpen, Users, Award } from "lucide-react";
 import { motion } from "motion/react";
 
 import { PlatformLogo } from "~/components/PlatformLogo";
 import { Button } from "~/components/ui/button";
-import { cn } from "~/lib/utils";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-function HeroPill() {
-  return (
-    <motion.a
-      href="#"
-      className="flex w-auto items-center space-x-2 rounded-full bg-primary/20 px-2 py-1 ring-1 ring-accent whitespace-pre"
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease }}
-    >
-      <div className="w-fit rounded-full bg-accent px-2 py-0.5 text-center text-xs font-medium text-primary sm:text-sm">
-        📣 Announcement
-      </div>
-      <p className="text-xs font-medium text-primary sm:text-sm">Welcome to iGird</p>
-      <svg
-        width="12"
-        height="12"
-        className="ml-1"
-        viewBox="0 0 12 12"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          d="M8.78141 5.33312L5.20541 1.75712L6.14808 0.814453L11.3334 5.99979L6.14808 11.1851L5.20541 10.2425L8.78141 6.66645H0.666748V5.33312H8.78141Z"
-          fill="hsl(var(--primary))"
-        />
-      </svg>
-    </motion.a>
-  );
-}
-
-function HeroTitles() {
-  return (
-    <div className="flex w-full max-w-2xl flex-col space-y-4 overflow-hidden pt-8">
-      <motion.h1
-        className="text-center text-4xl font-medium leading-tight text-foreground sm:text-5xl md:text-6xl"
-        initial={{ filter: "blur(10px)", opacity: 0, y: 50 }}
-        animate={{ filter: "blur(0px)", opacity: 1, y: 0 }}
-        transition={{
-          duration: 1,
-          ease,
-          staggerChildren: 0.2,
-        }}
-      >
-        {["Girding", "Minds", "for", "a", "Changing", "World"].map((text, index) => (
-          <motion.span
-            key={index}
-            className="inline-block px-1 md:px-2 text-balance font-semibold"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: index * 0.2,
-              ease,
-            }}
-          >
-            {text}
-          </motion.span>
-        ))}
-      </motion.h1>
-      <motion.p
-        className="mx-auto max-w-xl text-center text-lg leading-7 text-muted-foreground sm:text-xl sm:leading-9 text-balance"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.6,
-          duration: 0.8,
-          ease,
-        }}
-      >
-        Learn with iGird. Transform your learning journey with our comprehensive platform.
-      </motion.p>
-    </div>
-  );
-}
-
-function HeroCTA() {
-  return (
-    <>
-      <motion.div
-        className="mx-auto mt-6 flex w-full max-w-2xl flex-col items-center justify-center space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0"
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.8, duration: 0.8, ease }}
-      >
-        <Link to="/auth/register">
-          <Button className={cn("w-full sm:w-auto text-background flex gap-2")}>
-            <PlatformLogo variant="signet" className="h-6 w-6" alt="iGird" />
-            Get started for free
-          </Button>
-        </Link>
-        <Link to="/courses">
-          <Button variant="outline" className="w-full sm:w-auto">
-            Browse Courses
-          </Button>
-        </Link>
-      </motion.div>
-      <motion.p
-        className="mt-5 text-sm text-muted-foreground"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.0, duration: 0.8 }}
-      >
-        Free courses available. No credit card required.
-      </motion.p>
-    </>
-  );
-}
-
-function HeroImage() {
-  return (
-    <motion.div
-      className="relative mx-auto flex w-full items-center justify-center"
-      initial={{ opacity: 0, y: 50 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.2, duration: 1, ease }}
-    >
-      <div className="border rounded-lg shadow-lg max-w-screen-lg mt-16 p-8 bg-muted/50">
-        <div className="aspect-video bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center">
-          <PlatformLogo variant="full" className="h-24 w-auto" alt="iGird Platform" />
-        </div>
-      </div>
-    </motion.div>
-  );
-}
+const stats = [
+  { icon: Users, value: "50,000+", label: "Active Learners" },
+  { icon: BookOpen, value: "1,200+", label: "Courses Available" },
+  { icon: Award, value: "98%", label: "Completion Rate" },
+];
 
 export default function Hero() {
   return (
-    <section id="hero">
-      <div className="relative flex w-full flex-col items-center justify-start px-4 pt-32 sm:px-6 sm:pt-24 md:pt-32 lg:px-8">
-        <HeroPill />
-        <HeroTitles />
-        <HeroCTA />
-        <HeroImage />
-        <div className="pointer-events-none absolute inset-x-0 -bottom-12 h-1/3 bg-gradient-to-t from-background via-background to-transparent lg:h-1/4"></div>
+    <section id="hero" className="relative overflow-hidden bg-white">
+      {/* Background gradient blobs */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-blue-50 opacity-60 blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-indigo-50 opacity-50 blur-3xl" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 sm:pt-28 sm:pb-20">
+        <div className="flex flex-col items-center text-center">
+          {/* Badge */}
+          <motion.div
+            className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700 mb-8"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease }}
+          >
+            <span className="flex h-2 w-2 rounded-full bg-blue-500" />
+            The Modern Learning Management Platform
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1
+            className="max-w-4xl text-5xl sm:text-6xl md:text-7xl font-bold tracking-tight text-gray-900 leading-[1.1]"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease }}
+          >
+            Girding Minds for{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              a Changing World
+            </span>
+          </motion.h1>
+
+          {/* Subheadline */}
+          <motion.p
+            className="mt-6 max-w-2xl text-lg sm:text-xl text-gray-500 leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.25, ease }}
+          >
+            iGird is a full-featured LMS that empowers organizations, educators, and learners with
+            AI-powered tools, rich course content, and actionable insights — all in one platform.
+          </motion.p>
+
+          {/* CTAs */}
+          <motion.div
+            className="mt-10 flex flex-col sm:flex-row items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4, ease }}
+          >
+            <Link to="/auth/register">
+              <Button
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-12 text-base font-semibold shadow-lg shadow-blue-200 gap-2"
+              >
+                Start for Free
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            </Link>
+            <Link to="/courses">
+              <Button
+                size="lg"
+                variant="outline"
+                className="px-8 h-12 text-base font-medium border-gray-300 text-gray-700 hover:bg-gray-50"
+              >
+                Browse Courses
+              </Button>
+            </Link>
+          </motion.div>
+
+          <motion.p
+            className="mt-4 text-sm text-gray-400"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6, duration: 0.6 }}
+          >
+            No credit card required · Free courses included
+          </motion.p>
+
+          {/* Platform preview */}
+          <motion.div
+            className="mt-16 w-full max-w-5xl"
+            initial={{ opacity: 0, y: 60 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7, duration: 1, ease }}
+          >
+            <div className="relative rounded-2xl border border-gray-200 bg-white shadow-2xl shadow-gray-200/80 overflow-hidden">
+              <div className="flex items-center gap-1.5 px-4 py-3 border-b border-gray-100 bg-gray-50">
+                <span className="h-3 w-3 rounded-full bg-red-400" />
+                <span className="h-3 w-3 rounded-full bg-yellow-400" />
+                <span className="h-3 w-3 rounded-full bg-green-400" />
+                <span className="mx-auto text-xs text-gray-400">app.igird.com/dashboard</span>
+              </div>
+              <div className="aspect-[16/9] bg-gradient-to-br from-blue-50 via-indigo-50 to-white flex items-center justify-center p-12">
+                <div className="flex flex-col items-center gap-4">
+                  <PlatformLogo
+                    variant="full"
+                    className="h-16 w-auto opacity-80"
+                    alt="iGird Platform"
+                  />
+                  <p className="text-sm text-gray-400 font-medium">
+                    Your personalized learning dashboard
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Stats bar */}
+          <motion.div
+            className="mt-16 w-full max-w-3xl grid grid-cols-3 gap-px bg-gray-200 rounded-2xl overflow-hidden shadow-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.0, duration: 0.8, ease }}
+          >
+            {stats.map(({ icon: Icon, value, label }) => (
+              <div key={label} className="flex flex-col items-center gap-1 bg-white py-6 px-4">
+                <Icon className="h-5 w-5 text-blue-500 mb-1" />
+                <span className="text-2xl sm:text-3xl font-bold text-gray-900">{value}</span>
+                <span className="text-xs sm:text-sm text-gray-500 text-center">{label}</span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
