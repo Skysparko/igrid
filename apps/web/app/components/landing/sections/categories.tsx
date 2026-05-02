@@ -33,9 +33,9 @@ const categories = [
   {
     name: "Data Science",
     icon: TrendingUp,
-    color: "text-blue-600",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
+    color: "text-primary-600",
+    bg: "bg-primary-50",
+    border: "border-primary-100",
   },
   {
     name: "Computer Science",
@@ -116,7 +116,7 @@ export default function Categories() {
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Explore by category</h2>
           <Link
             to="/courses"
-            className="text-sm font-medium text-blue-600 hover:text-blue-700 hidden sm:block"
+            className="text-sm font-medium text-primary-600 hover:text-primary-700 hidden sm:block"
           >
             Browse all categories →
           </Link>
@@ -149,7 +149,10 @@ export default function Categories() {
         </div>
 
         <div className="mt-5 sm:hidden text-center">
-          <Link to="/courses" className="text-sm font-medium text-blue-600 hover:text-blue-700">
+          <Link
+            to="/courses"
+            className="text-sm font-medium text-primary-600 hover:text-primary-700"
+          >
             Browse all categories →
           </Link>
         </div>

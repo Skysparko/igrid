@@ -5,9 +5,9 @@ import { motion } from "motion/react";
 const paths = [
   {
     icon: TrendingUp,
-    color: "text-blue-600",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
+    color: "text-primary-600",
+    bg: "bg-primary-50",
+    border: "border-primary-100",
     title: "Launch a New Career",
     description:
       "Build job-ready skills with professional certificates designed with top employers.",

@@ -17,7 +17,7 @@ export default function Pricing() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-sm font-medium text-blue-600 uppercase tracking-widest mb-3">
+          <p className="text-sm font-medium text-primary-600 uppercase tracking-widest mb-3">
             Pricing
           </p>
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
@@ -35,7 +35,7 @@ export default function Pricing() {
               className={cn(
                 "relative flex flex-col rounded-2xl border bg-white p-8 shadow-sm transition-shadow hover:shadow-md",
                 plan.isPopular
-                  ? "border-blue-500 ring-2 ring-blue-500/20 shadow-lg shadow-blue-100"
+                  ? "border-primary-500 ring-2 ring-primary-500/20 shadow-lg shadow-primary-100"
                   : "border-gray-200",
               )}
               initial={{ opacity: 0, y: 24 }}
@@ -45,7 +45,7 @@ export default function Pricing() {
             >
               {plan.isPopular && (
                 <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-blue-600 px-3.5 py-1 text-xs font-semibold text-white shadow">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-primary-600 px-3.5 py-1 text-xs font-semibold text-white shadow">
                     <Zap className="h-3 w-3" />
                     Most Popular
                   </span>
@@ -68,8 +68,8 @@ export default function Pricing() {
               <ul className="flex-1 space-y-3 mb-8">
                 {plan.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3">
-                    <div className="flex-shrink-0 mt-0.5 h-5 w-5 rounded-full bg-blue-50 flex items-center justify-center">
-                      <Check className="h-3 w-3 text-blue-600" />
+                    <div className="flex-shrink-0 mt-0.5 h-5 w-5 rounded-full bg-primary-50 flex items-center justify-center">
+                      <Check className="h-3 w-3 text-primary-600" />
                     </div>
                     <span className="text-sm text-gray-600">{feature}</span>
                   </li>
@@ -81,7 +81,7 @@ export default function Pricing() {
                   className={cn(
                     "w-full h-11 font-semibold",
                     plan.isPopular
-                      ? "bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-200"
+                      ? "bg-primary-600 hover:bg-primary-700 text-white shadow-sm shadow-primary-200"
                       : "bg-white border border-gray-300 text-gray-800 hover:bg-gray-50",
                   )}
                   variant={plan.isPopular ? "default" : "outline"}

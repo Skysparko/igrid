@@ -13,7 +13,7 @@ interface HotReleasesProps {
 }
 
 const gradients = [
-  "from-blue-400 to-blue-600",
+  "from-primary-400 to-primary-600",
   "from-orange-400 to-pink-500",
   "from-violet-400 to-purple-600",
   "from-emerald-400 to-teal-600",
@@ -63,7 +63,7 @@ export default function HotReleases({ courses, isLoading }: HotReleasesProps) {
           transition={{ duration: 0.5 }}
         >
           {/* Left promo card */}
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-700 p-8 text-white flex flex-col justify-between min-h-[240px] lg:w-72 flex-shrink-0 shadow-lg shadow-blue-200/40">
+          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 to-primary-900 p-8 text-white flex flex-col justify-between min-h-[240px] lg:w-72 flex-shrink-0 shadow-lg shadow-primary-200/40">
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
               <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
               <div className="absolute -bottom-10 -left-10 h-32 w-32 rounded-full bg-white/8 blur-xl" />
@@ -74,12 +74,12 @@ export default function HotReleases({ courses, isLoading }: HotReleasesProps) {
                 New This Week
               </div>
               <h2 className="text-2xl font-bold mb-3 leading-snug">Hot new releases</h2>
-              <p className="text-blue-100 text-sm leading-relaxed">
+              <p className="text-primary-100 text-sm leading-relaxed">
                 Discover the latest courses from top instructors and institutions, added this week.
               </p>
             </div>
             <Link to="/courses" className="relative mt-6 inline-block">
-              <Button className="bg-white text-blue-700 hover:bg-blue-50 font-semibold gap-2 shadow-sm">
+              <Button className="bg-white text-primary-700 hover:bg-primary-50 font-semibold gap-2 shadow-sm">
                 Explore all courses
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -120,7 +120,7 @@ export default function HotReleases({ courses, isLoading }: HotReleasesProps) {
                     <p className="text-xs text-gray-400 mb-1 truncate">
                       {course.author || "Instructor"}
                     </p>
-                    <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 leading-snug group-hover:text-blue-700 transition-colors">
+                    <h3 className="text-sm font-semibold text-gray-900 line-clamp-2 leading-snug group-hover:text-primary-700 transition-colors">
                       {course.title}
                     </h3>
                     {course.category && (
@@ -136,7 +136,7 @@ export default function HotReleases({ courses, isLoading }: HotReleasesProps) {
                 <p className="text-gray-400 text-sm">No courses yet — check back soon!</p>
                 <Link
                   to="/courses"
-                  className="mt-3 inline-block text-sm font-medium text-blue-600 hover:text-blue-700"
+                  className="mt-3 inline-block text-sm font-medium text-primary-600 hover:text-primary-700"
                 >
                   Browse available courses →
                 </Link>

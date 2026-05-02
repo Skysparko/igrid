@@ -14,7 +14,7 @@ interface TrendingCoursesProps {
 const sections = [
   { label: "Most Popular", icon: Flame, color: "text-orange-500" },
   { label: "Weekly Spotlight", icon: Star, color: "text-yellow-500" },
-  { label: "In-Demand Skills", icon: Zap, color: "text-blue-500" },
+  { label: "In-Demand Skills", icon: Zap, color: "text-primary-500" },
 ];
 
 function SkeletonCard() {
@@ -68,7 +68,7 @@ export default function TrendingCourses({ courses, isLoading }: TrendingCoursesP
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Trending right now</h2>
           <Link
             to="/courses"
-            className="text-sm font-medium text-blue-600 hover:text-blue-700 hidden sm:block"
+            className="text-sm font-medium text-primary-600 hover:text-primary-700 hidden sm:block"
           >
             View all courses →
           </Link>
@@ -92,7 +92,7 @@ export default function TrendingCourses({ courses, isLoading }: TrendingCoursesP
                   <Link
                     key={course.id}
                     to={`/course/${course.id}`}
-                    className="group flex items-start gap-3 p-3 rounded-xl bg-white border border-gray-100 hover:border-blue-200 hover:shadow-sm transition-all duration-200"
+                    className="group flex items-start gap-3 p-3 rounded-xl bg-white border border-gray-100 hover:border-primary-200 hover:shadow-sm transition-all duration-200"
                   >
                     <img
                       src={course.thumbnailUrl || DefaultPhotoCourse}
@@ -106,7 +106,7 @@ export default function TrendingCourses({ courses, isLoading }: TrendingCoursesP
                       <p className="text-xs text-gray-400 mb-0.5 truncate">
                         {course.author || "Instructor"}
                       </p>
-                      <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 leading-snug group-hover:text-blue-700 transition-colors">
+                      <h4 className="text-sm font-semibold text-gray-900 line-clamp-2 leading-snug group-hover:text-primary-700 transition-colors">
                         {course.title}
                       </h4>
                       <div className="mt-1.5 flex items-center gap-2">

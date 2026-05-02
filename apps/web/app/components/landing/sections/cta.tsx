@@ -9,7 +9,7 @@ export default function CTA() {
     <section id="cta" className="py-24 sm:py-32 bg-white">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 px-8 py-16 sm:px-16 sm:py-20 text-center shadow-2xl"
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary-600 via-primary-700 to-primary-900 px-8 py-16 sm:px-16 sm:py-20 text-center shadow-2xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -30,7 +30,7 @@ export default function CTA() {
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
               Ready to Transform Your Learning?
             </h2>
-            <p className="text-lg text-blue-100 max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg text-primary-100 max-w-2xl mx-auto mb-10 leading-relaxed">
               Join over 50,000 learners and hundreds of organizations already growing with iGird.
               Free to get started — no credit card required.
             </p>
@@ -39,7 +39,7 @@ export default function CTA() {
               <Link to="/auth/register">
                 <Button
                   size="lg"
-                  className="bg-white text-blue-700 hover:bg-blue-50 px-8 h-12 font-semibold shadow-lg gap-2"
+                  className="bg-white text-primary-700 hover:bg-primary-50 px-8 h-12 font-semibold shadow-lg gap-2"
                 >
                   Get Started for Free
                   <ArrowRight className="h-4 w-4" />
@@ -56,7 +56,7 @@ export default function CTA() {
               </Link>
             </div>
 
-            <p className="mt-6 text-sm text-blue-200">
+            <p className="mt-6 text-sm text-primary-200">
               Need a custom solution?{" "}
               <Link
                 to="mailto:sales@igird.com"

@@ -18,20 +18,20 @@ export default function Hero() {
     <section id="hero" className="relative overflow-hidden bg-white">
       {/* Background gradient blobs */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-blue-50 opacity-60 blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-indigo-50 opacity-50 blur-3xl" />
+        <div className="absolute -top-40 -right-40 h-[600px] w-[600px] rounded-full bg-primary-50 opacity-60 blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-primary-100 opacity-40 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-20 pb-16 sm:pt-28 sm:pb-20">
         <div className="flex flex-col items-center text-center">
           {/* Badge */}
           <motion.div
-            className="inline-flex items-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 py-1.5 text-sm font-medium text-blue-700 mb-8"
+            className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50 px-4 py-1.5 text-sm font-medium text-primary-700 mb-8"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease }}
           >
-            <span className="flex h-2 w-2 rounded-full bg-blue-500" />
+            <span className="flex h-2 w-2 rounded-full bg-primary-500" />
             The Modern Learning Management Platform
           </motion.div>
 
@@ -43,7 +43,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.1, ease }}
           >
             Girding Minds for{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-primary-500 to-primary-800 bg-clip-text text-transparent">
               a Changing World
             </span>
           </motion.h1>
@@ -69,7 +69,7 @@ export default function Hero() {
             <Link to="/auth/register">
               <Button
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-12 text-base font-semibold shadow-lg shadow-blue-200 gap-2"
+                className="bg-primary-600 hover:bg-primary-700 text-white px-8 h-12 text-base font-semibold shadow-lg shadow-primary-200 gap-2"
               >
                 Start for Free
                 <ArrowRight className="h-4 w-4" />
@@ -109,7 +109,7 @@ export default function Hero() {
                 <span className="h-3 w-3 rounded-full bg-green-400" />
                 <span className="mx-auto text-xs text-gray-400">app.igird.com/dashboard</span>
               </div>
-              <div className="aspect-[16/9] bg-gradient-to-br from-blue-50 via-indigo-50 to-white flex items-center justify-center p-12">
+              <div className="aspect-[16/9] bg-gradient-to-br from-primary-50 via-primary-100 to-white flex items-center justify-center p-12">
                 <div className="flex flex-col items-center gap-4">
                   <PlatformLogo
                     variant="full"
@@ -133,7 +133,7 @@ export default function Hero() {
           >
             {stats.map(({ icon: Icon, value, label }) => (
               <div key={label} className="flex flex-col items-center gap-1 bg-white py-6 px-4">
-                <Icon className="h-5 w-5 text-blue-500 mb-1" />
+                <Icon className="h-5 w-5 text-primary-500 mb-1" />
                 <span className="text-2xl sm:text-3xl font-bold text-gray-900">{value}</span>
                 <span className="text-xs sm:text-sm text-gray-500 text-center">{label}</span>
               </div>

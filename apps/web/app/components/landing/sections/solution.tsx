@@ -14,7 +14,7 @@ const features = [
     title: "AI-Powered Guidance",
     description:
       "Get personalized learning support from AI mentors that adapt to your learning style and provide real-time assistance.",
-    className: "order-3 xl:order-none hover:bg-blue-500/10 transition-all duration-500 ease-out",
+    className: "order-3 xl:order-none hover:bg-primary-500/10 transition-all duration-500 ease-out",
   },
   {
     title: "Progress Analytics",

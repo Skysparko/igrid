@@ -18,23 +18,23 @@ export default function CareerPaths() {
       salary: "$493,271",
       jobs: "23,492",
       icon: <Zap className="h-8 w-8 text-yellow-500" />,
-      gradient: "from-yellow-400 to-blue-500",
+      gradient: "from-yellow-400 to-primary-500",
     },
     {
       title: "Business Intelligence Analyst",
       description: "Analyzes and visualizes data",
       salary: "$958,188",
       jobs: "78,973",
-      icon: <BarChart3 className="h-8 w-8 text-blue-500" />,
-      gradient: "from-yellow-400 to-blue-500",
+      icon: <BarChart3 className="h-8 w-8 text-primary-500" />,
+      gradient: "from-yellow-400 to-primary-500",
     },
     {
       title: "Cyber Security Analyst",
       description: "Monitors IT systems, analyzes threats",
       salary: "$1,257,500",
       jobs: "2,373",
-      icon: <Shield className="h-8 w-8 text-blue-500" />,
-      gradient: "from-blue-400 to-white",
+      icon: <Shield className="h-8 w-8 text-primary-500" />,
+      gradient: "from-primary-400 to-white",
     },
     {
       title: "Data Analyst",
@@ -42,7 +42,7 @@ export default function CareerPaths() {
       salary: "$303,299",
       jobs: "26,461",
       icon: <TrendingUp className="h-8 w-8 text-yellow-500" />,
-      gradient: "from-yellow-400 to-blue-500",
+      gradient: "from-yellow-400 to-primary-500",
     },
     {
       title: "Content Creator",
@@ -50,7 +50,7 @@ export default function CareerPaths() {
       salary: "$450,000",
       jobs: "15,234",
       icon: <PenTool className="h-8 w-8 text-pink-500" />,
-      gradient: "from-blue-400 to-white",
+      gradient: "from-primary-400 to-white",
     },
   ];
 
@@ -59,7 +59,7 @@ export default function CareerPaths() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4">
           <h2 className="text-xl md:text-2xl font-semibold text-gray-900">Explore careers</h2>
-          <Link to="/courses" className="text-blue-600 hover:text-blue-700 font-medium">
+          <Link to="/courses" className="text-primary-600 hover:text-primary-700 font-medium">
             Explore all <ChevronRight className="inline h-4 w-4" />
           </Link>
         </div>

@@ -10,7 +10,7 @@ export default function PromotionalBanners() {
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-5">
         {/* iGird Plus banner */}
         <motion.div
-          className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 p-8 text-white min-h-[280px] flex flex-col justify-between shadow-lg shadow-blue-200/40"
+          className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 to-primary-800 p-8 text-white min-h-[280px] flex flex-col justify-between shadow-lg shadow-primary-200/40"
           initial={{ opacity: 0, x: -20 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
@@ -29,11 +29,11 @@ export default function PromotionalBanners() {
             <h2 className="text-2xl md:text-3xl font-bold leading-snug mb-3">
               Unlimited learning, one subscription
             </h2>
-            <p className="text-blue-100 text-sm md:text-base leading-relaxed mb-6 max-w-xs">
+            <p className="text-primary-100 text-sm md:text-base leading-relaxed mb-6 max-w-xs">
               Access 10,000+ programs from leading universities and companies — at one flat rate.
             </p>
             <Link to="/auth/register">
-              <Button className="bg-white text-blue-700 hover:bg-blue-50 font-semibold gap-2 shadow-sm">
+              <Button className="bg-white text-primary-700 hover:bg-primary-50 font-semibold gap-2 shadow-sm">
                 Save on iGird Plus
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -41,9 +41,9 @@ export default function PromotionalBanners() {
           </div>
           <div className="relative mt-6 flex items-end justify-between">
             <div className="text-sm">
-              <span className="line-through text-blue-300 mr-2">$13,999</span>
+              <span className="line-through text-primary-300 mr-2">$13,999</span>
               <span className="text-2xl font-bold">$7,999</span>
-              <span className="text-blue-200 text-sm">/year</span>
+              <span className="text-primary-200 text-sm">/year</span>
             </div>
             <div className="flex gap-2 flex-wrap justify-end">
               {["Google", "Microsoft", "IBM"].map((b) => (

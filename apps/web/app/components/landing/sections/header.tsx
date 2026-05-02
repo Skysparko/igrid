@@ -41,7 +41,7 @@ export default function Header() {
               placeholder="What do you want to learn?"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 w-full border-gray-300 focus:border-blue-500 rounded-md"
+              className="pl-10 w-full border-gray-300 focus:border-primary-500 rounded-md"
             />
           </div>
         </div>
@@ -54,7 +54,7 @@ export default function Header() {
                   <div key={index}>
                     {item.trigger ? (
                       <div className="relative group">
-                        <button className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors">
+                        <button className="text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors">
                           {item.trigger}
                         </button>
                         {item.content && (
@@ -62,7 +62,7 @@ export default function Header() {
                             {item.content.main && (
                               <Link
                                 to={item.content.main.href}
-                                className="block mb-4 p-4 rounded-md bg-blue-50 hover:bg-blue-100 transition-colors"
+                                className="block mb-4 p-4 rounded-md bg-primary-50 hover:bg-primary-100 transition-colors"
                               >
                                 <div className="mb-2">{item.content.main.icon}</div>
                                 <div className="text-lg font-medium mb-1 text-gray-900">
@@ -95,7 +95,7 @@ export default function Header() {
                     ) : (
                       <Link
                         to={item.href || "#"}
-                        className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
+                        className="text-sm font-medium text-gray-700 hover:text-primary-600 transition-colors"
                       >
                         {item.label}
                       </Link>
@@ -146,7 +146,7 @@ export default function Header() {
                   </Button>
                 </Link>
                 <Link to="/auth/register">
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                  <Button className="bg-primary-600 hover:bg-primary-700 text-white">
                     Join for Free
                   </Button>
                 </Link>
@@ -215,7 +215,9 @@ export default function Header() {
                   className="block w-full"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">Go to Dashboard</Button>
+                  <Button className="w-full bg-primary-600 hover:bg-primary-700">
+                    Go to Dashboard
+                  </Button>
                 </Link>
               </div>
             ) : (
@@ -234,7 +236,9 @@ export default function Header() {
                   className="block w-full"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">Join for Free</Button>
+                  <Button className="w-full bg-primary-600 hover:bg-primary-700">
+                    Join for Free
+                  </Button>
                 </Link>
               </div>
             )}

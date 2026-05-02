@@ -25,8 +25,8 @@ const features = [
     icon: BarChart3,
     title: "Progress Analytics",
     description: "Rich dashboards and reports for learners, instructors, and administrators.",
-    color: "text-blue-600",
-    bg: "bg-blue-50",
+    color: "text-primary-600",
+    bg: "bg-primary-50",
   },
   {
     icon: BadgeCheck,

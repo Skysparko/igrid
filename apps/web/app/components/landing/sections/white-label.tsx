@@ -60,21 +60,21 @@ export default function WhiteLabel() {
     <section id="white-label" className="relative overflow-hidden bg-gray-950 py-24 sm:py-32">
       {/* Background decorations */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-60 right-0 h-[500px] w-[500px] rounded-full bg-blue-900/30 blur-3xl" />
-        <div className="absolute bottom-0 -left-40 h-[400px] w-[400px] rounded-full bg-indigo-900/20 blur-3xl" />
+        <div className="absolute -top-60 right-0 h-[500px] w-[500px] rounded-full bg-primary-900/30 blur-3xl" />
+        <div className="absolute bottom-0 -left-40 h-[400px] w-[400px] rounded-full bg-primary-900/20 blur-3xl" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <motion.div
-            className="inline-flex items-center gap-2 rounded-full border border-blue-700/50 bg-blue-900/40 px-4 py-1.5 text-sm font-medium text-blue-400 mb-6"
+            className="inline-flex items-center gap-2 rounded-full border border-primary-700/50 bg-primary-900/40 px-4 py-1.5 text-sm font-medium text-primary-400 mb-6"
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <span className="flex h-2 w-2 rounded-full bg-blue-400" />
+            <span className="flex h-2 w-2 rounded-full bg-primary-400" />
             White Label Solution
           </motion.div>
 
@@ -112,8 +112,8 @@ export default function WhiteLabel() {
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.08 }}
             >
-              <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600/20 mb-4">
-                <cap.icon className="h-5 w-5 text-blue-400" />
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary-600/20 mb-4">
+                <cap.icon className="h-5 w-5 text-primary-400" />
               </div>
               <h3 className="text-base font-semibold text-white mb-2">{cap.title}</h3>
               <p className="text-sm text-gray-400 leading-relaxed">{cap.description}</p>
@@ -153,7 +153,7 @@ export default function WhiteLabel() {
             <Link to="mailto:sales@igird.com">
               <Button
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-500 text-white px-8 h-12 font-semibold shadow-lg shadow-blue-900/40 gap-2"
+                className="bg-primary-600 hover:bg-primary-500 text-white px-8 h-12 font-semibold shadow-lg shadow-primary-900/40 gap-2"
               >
                 Talk to Sales
                 <ArrowRight className="h-4 w-4" />

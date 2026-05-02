@@ -9,9 +9,9 @@ const steps = [
     step: "01",
     title: "Create Your Account",
     description: "Sign up for free in under 60 seconds. No credit card needed to get started.",
-    color: "text-blue-600",
-    bg: "bg-blue-50",
-    border: "border-blue-100",
+    color: "text-primary-600",
+    bg: "bg-primary-50",
+    border: "border-primary-100",
   },
   {
     icon: Search,
@@ -45,7 +45,7 @@ export default function HowItWorks() {
     >
       <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 relative">
         {/* Connecting line (desktop) */}
-        <div className="hidden md:block absolute top-14 left-[calc(16.6%+1rem)] right-[calc(16.6%+1rem)] h-px bg-gradient-to-r from-blue-200 via-indigo-200 to-purple-200" />
+        <div className="hidden md:block absolute top-14 left-[calc(16.6%+1rem)] right-[calc(16.6%+1rem)] h-px bg-gradient-to-r from-primary-200 via-primary-300 to-secondary-200" />
 
         {steps.map((s, index) => (
           <motion.div
