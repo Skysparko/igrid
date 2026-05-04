@@ -56,7 +56,17 @@ function resolveLinks<T>(
 }
 
 export async function fetchLandingContent(): Promise<LandingScreenContent | null> {
-  if (!SPACE_ID || !ACCESS_TOKEN) return null;
+  console.group("[Contentful] fetchLandingContent");
+  console.log("SPACE_ID set:", Boolean(SPACE_ID));
+  console.log("ACCESS_TOKEN set:", Boolean(ACCESS_TOKEN));
+  console.log("ENVIRONMENT:", ENVIRONMENT);
+  console.log("CONTENT_TYPE:", LANDING_CONTENT_TYPE);
+
+  if (!SPACE_ID || !ACCESS_TOKEN) {
+    console.warn("[Contentful] Missing env vars — falling back to local content.");
+    console.groupEnd();
+    return null;
+  }
 
   const url = new URL(
     `https://cdn.contentful.com/spaces/${SPACE_ID}/environments/${ENVIRONMENT}/entries`,
@@ -66,17 +76,44 @@ export async function fetchLandingContent(): Promise<LandingScreenContent | null
   url.searchParams.set("access_token", ACCESS_TOKEN);
   url.searchParams.set("limit", "1");
 
-  const res = await fetch(url.toString());
+  console.log("Fetching:", url.toString().replace(ACCESS_TOKEN, "***"));
+
+  let res: Response;
+  try {
+    res = await fetch(url.toString());
+  } catch (err) {
+    console.error("[Contentful] Network error:", err);
+    console.groupEnd();
+    throw err;
+  }
+
+  console.log("Response status:", res.status, res.statusText);
+
   if (!res.ok) {
+    const body = await res.text().catch(() => "(unreadable)");
+    console.error("[Contentful] Error response body:", body);
+    console.groupEnd();
     throw new Error(`Contentful request failed with status ${res.status}`);
   }
 
   const raw = await res.json();
   const entry: RawEntry | undefined = raw.items?.[0];
-  if (!entry) return null;
+  console.log("Items returned:", raw.items?.length ?? 0);
+  console.log("Includes entries:", raw.includes?.Entry?.length ?? 0);
+  console.log("Includes assets:", raw.includes?.Asset?.length ?? 0);
+
+  if (!entry) {
+    console.warn("[Contentful] No entry found for content type:", LANDING_CONTENT_TYPE);
+    console.groupEnd();
+    return null;
+  }
 
   const includes = buildIncludesMap(raw);
   const f = entry.fields;
+
+  console.log("[Contentful] Entry ID:", entry.sys.id);
+  console.log("[Contentful] Fields present:", Object.keys(f).join(", "));
+  console.groupEnd();
 
   return {
     tag: f.tag as string | undefined,
