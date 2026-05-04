@@ -4,7 +4,7 @@ services:
     container_name: mentingo-ollama
     restart: unless-stopped
     ports:
-      - "11434:11434"
+      - "11435:11434"
     volumes:
       - ollama-data:/root/.ollama
     # GPU support for NVIDIA GPU (126GB VRAM)
