@@ -5,10 +5,12 @@ import { motion } from "motion/react";
 import DefaultPhotoCourse from "~/assets/svgs/default-photo-course.svg";
 
 import type { GetAvailableCoursesResponse } from "~/api/generated-api";
+import type { LandingScreenContent } from "~/types/contentful";
 
 interface TrendingCoursesProps {
   courses?: GetAvailableCoursesResponse["data"];
   isLoading?: boolean;
+  content?: LandingScreenContent;
 }
 
 const sections = [
@@ -30,7 +32,9 @@ function SkeletonCard() {
   );
 }
 
-export default function TrendingCourses({ courses, isLoading }: TrendingCoursesProps) {
+export default function TrendingCourses({ courses, isLoading, content }: TrendingCoursesProps) {
+  const sectionTitle = content?.trendingTitle ?? "Trending right now";
+
   if (isLoading) {
     return (
       <section className="py-14 px-4 bg-gray-50/60">
@@ -65,7 +69,7 @@ export default function TrendingCourses({ courses, isLoading }: TrendingCoursesP
           viewport={{ once: true }}
           transition={{ duration: 0.4 }}
         >
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">Trending right now</h2>
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{sectionTitle}</h2>
           <Link
             to="/courses"
             className="text-sm font-medium text-primary-600 hover:text-primary-700 hidden sm:block"

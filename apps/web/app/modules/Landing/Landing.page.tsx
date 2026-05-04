@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import { useAvailableCourses } from "~/api/queries/useAvailableCourses";
+import { useCategories } from "~/api/queries/useCategories";
 import Categories from "~/components/landing/sections/categories";
 import CTA from "~/components/landing/sections/cta";
 import Features from "~/components/landing/sections/features";
@@ -14,6 +15,8 @@ import Partners from "~/components/landing/sections/partners";
 import PromotionalBanners from "~/components/landing/sections/promotional-banners";
 import TrendingCourses from "~/components/landing/sections/trending-courses";
 import WhiteLabel from "~/components/landing/sections/white-label";
+import { useLandingContent } from "~/hooks/useLandingContent";
+import { isContentfulConfigured } from "~/lib/contentful";
 
 import type { MetaFunction } from "@remix-run/react";
 
@@ -28,8 +31,30 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+function ContentSourceBadge({ isLive }: { isLive: boolean }) {
+  if (!import.meta.env.DEV) return null;
+  return (
+    <div
+      className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-sm select-none pointer-events-none"
+      style={
+        isLive
+          ? { background: "#f0fdf4", borderColor: "#86efac", color: "#15803d" }
+          : { background: "#fff7ed", borderColor: "#fdba74", color: "#c2410c" }
+      }
+    >
+      <span
+        className="h-2 w-2 rounded-full"
+        style={{ background: isLive ? "#22c55e" : "#f97316" }}
+      />
+      {isLive ? "CMS: Contentful" : "CMS: Local fallback"}
+    </div>
+  );
+}
+
 export default function LandingPage() {
   const { data: courses, isLoading, error } = useAvailableCourses();
+  const { data: categories, isLoading: categoriesLoading } = useCategories({ archived: false });
+  const { data: content } = useLandingContent();
 
   useEffect(() => {
     if (error) {
@@ -39,39 +64,32 @@ export default function LandingPage() {
 
   return (
     <main className="bg-white min-h-screen">
+      <ContentSourceBadge isLive={isContentfulConfigured() && content != null} />
       <Header />
 
-      {/* Above-the-fold hero */}
-      <Hero />
+      <Hero content={content ?? undefined} />
 
-      {/* Social proof — partner logos */}
-      <Partners />
+      <Partners content={content ?? undefined} />
 
-      {/* Goal-based learning paths */}
-      <LearningPaths />
+      <LearningPaths content={content ?? undefined} />
 
-      {/* Promotional offers */}
-      <PromotionalBanners />
+      <PromotionalBanners content={content ?? undefined} />
 
-      {/* Platform capabilities */}
-      <Features />
+      <Features content={content ?? undefined} />
 
-      {/* Onboarding clarity */}
-      <HowItWorks />
+      <HowItWorks content={content ?? undefined} />
 
-      {/* Course discovery */}
-      <TrendingCourses courses={courses} isLoading={isLoading} />
-      <Categories />
-      <HotReleases courses={courses} isLoading={isLoading} />
+      <TrendingCourses courses={courses} isLoading={isLoading} content={content ?? undefined} />
+      <Categories
+        content={content ?? undefined}
+        categories={categories}
+        isLoading={categoriesLoading}
+      />
+      <HotReleases courses={courses} isLoading={isLoading} content={content ?? undefined} />
 
-      {/* White label pitch */}
-      <WhiteLabel />
+      <WhiteLabel content={content ?? undefined} />
 
-      {/* Pricing */}
-      {/*<Pricing />*/}
-
-      {/* Final conversion CTA */}
-      <CTA />
+      <CTA content={content ?? undefined} />
 
       <Footer />
     </main>

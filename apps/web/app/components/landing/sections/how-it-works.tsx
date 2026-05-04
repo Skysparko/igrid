@@ -1,75 +1,89 @@
-import { UserPlus, Search, Rocket } from "lucide-react";
+import { UserPlus, Search, Rocket, type LucideIcon } from "lucide-react";
 import { motion } from "motion/react";
 
 import Section from "~/components/landing/section";
 
-const steps = [
+import type { LandingScreenContent } from "~/types/contentful";
+
+const STEP_STYLES: { icon: LucideIcon; color: string; bg: string; border: string }[] = [
+  { icon: UserPlus, color: "text-primary-600", bg: "bg-primary-50", border: "border-primary-100" },
+  { icon: Search, color: "text-indigo-600", bg: "bg-indigo-50", border: "border-indigo-100" },
+  { icon: Rocket, color: "text-purple-600", bg: "bg-purple-50", border: "border-purple-100" },
+];
+
+const DEFAULT_STEPS = [
   {
-    icon: UserPlus,
-    step: "01",
     title: "Create Your Account",
     description: "Sign up for free in under 60 seconds. No credit card needed to get started.",
-    color: "text-primary-600",
-    bg: "bg-primary-50",
-    border: "border-primary-100",
   },
   {
-    icon: Search,
-    step: "02",
     title: "Explore & Enroll",
     description:
       "Browse 1,200+ courses across categories. Enroll instantly or get assigned by your organization.",
-    color: "text-indigo-600",
-    bg: "bg-indigo-50",
-    border: "border-indigo-100",
   },
   {
-    icon: Rocket,
-    step: "03",
     title: "Learn & Grow",
     description:
       "Complete courses at your pace, earn certificates, and track your progress with detailed analytics.",
-    color: "text-purple-600",
-    bg: "bg-purple-50",
-    border: "border-purple-100",
   },
 ];
 
-export default function HowItWorks() {
+interface HowItWorksProps {
+  content?: LandingScreenContent;
+}
+
+export default function HowItWorks({ content }: HowItWorksProps) {
+  const sectionTitle = content?.howItWorksTitle ?? "How It Works";
+  const sectionDescription = content?.howItWorksDescription ?? undefined;
+
+  const steps =
+    content?.howItWorksSteps && content.howItWorksSteps.length > 0
+      ? content.howItWorksSteps.map((step) => ({
+          title: step.fields.title ?? "",
+          description: step.fields.description ?? "",
+        }))
+      : DEFAULT_STEPS;
+
   return (
     <Section
       id="how-it-works"
-      title="How It Works"
+      title={sectionTitle}
       subtitle="Up and Running in Minutes"
-      description="Getting started with iGird is simple. Follow three steps to kick off your learning journey."
+      description={
+        sectionDescription ??
+        "Getting started with iGird is simple. Follow three steps to kick off your learning journey."
+      }
     >
       <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-        {/* Connecting line (desktop) */}
         <div className="hidden md:block absolute top-14 left-[calc(16.6%+1rem)] right-[calc(16.6%+1rem)] h-px bg-gradient-to-r from-primary-200 via-primary-300 to-secondary-200" />
 
-        {steps.map((s, index) => (
-          <motion.div
-            key={s.step}
-            className="flex flex-col items-center text-center"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.15 }}
-          >
-            <div
-              className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border-2 ${s.border} ${s.bg} shadow-sm mb-6`}
+        {steps.map((step, index) => {
+          const style = STEP_STYLES[index % STEP_STYLES.length];
+          const Icon = style.icon;
+          return (
+            <motion.div
+              key={step.title}
+              className="flex flex-col items-center text-center"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
             >
-              <s.icon className={`h-6 w-6 ${s.color}`} />
-              <span
-                className={`absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-white border ${s.border} text-[10px] font-bold ${s.color}`}
+              <div
+                className={`relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl border-2 ${style.border} ${style.bg} shadow-sm mb-6`}
               >
-                {index + 1}
-              </span>
-            </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">{s.title}</h3>
-            <p className="text-sm text-gray-500 leading-relaxed max-w-xs">{s.description}</p>
-          </motion.div>
-        ))}
+                <Icon className={`h-6 w-6 ${style.color}`} />
+                <span
+                  className={`absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-white border ${style.border} text-[10px] font-bold ${style.color}`}
+                >
+                  {index + 1}
+                </span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">{step.title}</h3>
+              <p className="text-sm text-gray-500 leading-relaxed max-w-xs">{step.description}</p>
+            </motion.div>
+          );
+        })}
       </div>
     </Section>
   );

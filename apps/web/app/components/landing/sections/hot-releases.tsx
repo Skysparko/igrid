@@ -6,10 +6,12 @@ import DefaultPhotoCourse from "~/assets/svgs/default-photo-course.svg";
 import { Button } from "~/components/ui/button";
 
 import type { GetAvailableCoursesResponse } from "~/api/generated-api";
+import type { LandingScreenContent } from "~/types/contentful";
 
 interface HotReleasesProps {
   courses?: GetAvailableCoursesResponse["data"];
   isLoading?: boolean;
+  content?: LandingScreenContent;
 }
 
 const gradients = [
@@ -32,7 +34,14 @@ function SkeletonCard() {
   );
 }
 
-export default function HotReleases({ courses, isLoading }: HotReleasesProps) {
+export default function HotReleases({ courses, isLoading, content }: HotReleasesProps) {
+  const tag = content?.newReleasesTag ?? "New This Week";
+  const title = content?.newReleasesTitle ?? "Hot new releases";
+  const description =
+    content?.newReleasesDescription ??
+    "Discover the latest courses from top instructors and institutions, added this week.";
+  const buttonText = content?.newReleasesButtonText ?? "Explore all courses";
+
   const featuredCourses = courses?.slice(0, 4) || [];
 
   if (isLoading) {
@@ -62,7 +71,6 @@ export default function HotReleases({ courses, isLoading }: HotReleasesProps) {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          {/* Left promo card */}
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-primary-600 to-primary-900 p-8 text-white flex flex-col justify-between min-h-[240px] lg:w-72 flex-shrink-0 shadow-lg shadow-primary-200/40">
             <div className="pointer-events-none absolute inset-0 overflow-hidden">
               <div className="absolute -top-10 -right-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
@@ -71,22 +79,19 @@ export default function HotReleases({ courses, isLoading }: HotReleasesProps) {
             <div className="relative">
               <div className="inline-flex items-center gap-1.5 rounded-full bg-white/20 border border-white/30 px-3 py-1 text-xs font-semibold text-white mb-4">
                 <Flame className="h-3 w-3" />
-                New This Week
+                {tag}
               </div>
-              <h2 className="text-2xl font-bold mb-3 leading-snug">Hot new releases</h2>
-              <p className="text-primary-100 text-sm leading-relaxed">
-                Discover the latest courses from top instructors and institutions, added this week.
-              </p>
+              <h2 className="text-2xl font-bold mb-3 leading-snug">{title}</h2>
+              <p className="text-primary-100 text-sm leading-relaxed">{description}</p>
             </div>
             <Link to="/courses" className="relative mt-6 inline-block">
               <Button className="bg-white text-primary-700 hover:bg-primary-50 font-semibold gap-2 shadow-sm">
-                Explore all courses
+                {buttonText}
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
           </div>
 
-          {/* Course cards grid */}
           {featuredCourses.length > 0 ? (
             <div className="grid grid-cols-2 gap-4 flex-1">
               {featuredCourses.map((course, index) => (

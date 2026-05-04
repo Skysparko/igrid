@@ -1,18 +1,28 @@
 import { motion } from "motion/react";
 
-const partners = [
-  { name: "Google", abbr: "G" },
-  { name: "Microsoft", abbr: "Ms" },
-  { name: "IBM", abbr: "IBM" },
-  { name: "Stanford", abbr: "Su" },
-  { name: "Meta", abbr: "M" },
-  { name: "Adobe", abbr: "Ae" },
-  { name: "DeepLearning.AI", abbr: "DL" },
-  { name: "MIT", abbr: "MIT" },
-  { name: "Vanderbilt", abbr: "Vu" },
+import type { LandingScreenContent } from "~/types/contentful";
+
+const DEFAULT_PARTNERS = [
+  "Google",
+  "Microsoft",
+  "IBM",
+  "Stanford",
+  "Meta",
+  "Adobe",
+  "DeepLearning.AI",
+  "MIT",
+  "Vanderbilt",
 ];
 
-export default function Partners() {
+interface PartnersProps {
+  content?: LandingScreenContent;
+}
+
+export default function Partners({ content }: PartnersProps) {
+  const title =
+    content?.companySectionTitle ?? "Trusted by learners from 350+ world-class institutions";
+  const partners = content?.companySectionCompanyNames ?? DEFAULT_PARTNERS;
+
   return (
     <section className="border-y border-gray-100 bg-gray-50/60 py-12 px-4">
       <div className="max-w-7xl mx-auto">
@@ -23,7 +33,7 @@ export default function Partners() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          Trusted by learners from 350+ world-class institutions
+          {title}
         </motion.p>
         <motion.div
           className="flex flex-wrap justify-center items-center gap-x-10 gap-y-5"
@@ -34,10 +44,10 @@ export default function Partners() {
         >
           {partners.map((partner) => (
             <div
-              key={partner.name}
+              key={partner}
               className="text-gray-300 font-bold text-lg sm:text-xl tracking-tight hover:text-gray-500 transition-colors duration-200 select-none"
             >
-              {partner.name}
+              {partner}
             </div>
           ))}
         </motion.div>
