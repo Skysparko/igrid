@@ -32,7 +32,6 @@ export const meta: MetaFunction = () => {
 };
 
 function ContentSourceBadge({ isLive }: { isLive: boolean }) {
-  if (!import.meta.env.DEV) return null;
   return (
     <div
       className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-sm select-none pointer-events-none"
