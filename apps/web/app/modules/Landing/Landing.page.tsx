@@ -16,7 +16,7 @@ import PromotionalBanners from "~/components/landing/sections/promotional-banner
 import TrendingCourses from "~/components/landing/sections/trending-courses";
 import WhiteLabel from "~/components/landing/sections/white-label";
 import { useLandingContent } from "~/hooks/useLandingContent";
-import { isContentfulConfigured } from "~/lib/contentful";
+// import { isContentfulConfigured } from "~/lib/contentful";
 
 import type { MetaFunction } from "@remix-run/react";
 
@@ -31,24 +31,24 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-function ContentSourceBadge({ isLive }: { isLive: boolean }) {
-  return (
-    <div
-      className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-sm select-none pointer-events-none"
-      style={
-        isLive
-          ? { background: "#f0fdf4", borderColor: "#86efac", color: "#15803d" }
-          : { background: "#fff7ed", borderColor: "#fdba74", color: "#c2410c" }
-      }
-    >
-      <span
-        className="h-2 w-2 rounded-full"
-        style={{ background: isLive ? "#22c55e" : "#f97316" }}
-      />
-      {isLive ? "CMS: Contentful" : "CMS: Local fallback"}
-    </div>
-  );
-}
+// function ContentSourceBadge({ isLive }: { isLive: boolean }) {
+//   return (
+//     <div
+//       className="fixed bottom-4 right-4 z-50 flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-semibold shadow-lg backdrop-blur-sm select-none pointer-events-none"
+//       style={
+//         isLive
+//           ? { background: "#f0fdf4", borderColor: "#86efac", color: "#15803d" }
+//           : { background: "#fff7ed", borderColor: "#fdba74", color: "#c2410c" }
+//       }
+//     >
+//       <span
+//         className="h-2 w-2 rounded-full"
+//         style={{ background: isLive ? "#22c55e" : "#f97316" }}
+//       />
+//       {isLive ? "CMS: Contentful" : "CMS: Local fallback"}
+//     </div>
+//   );
+// }
 
 export default function LandingPage() {
   const { data: courses, isLoading, error } = useAvailableCourses();
@@ -63,7 +63,7 @@ export default function LandingPage() {
 
   return (
     <main className="bg-white min-h-screen">
-      <ContentSourceBadge isLive={isContentfulConfigured() && content != null} />
+      {/* <ContentSourceBadge isLive={isContentfulConfigured() && content != null} /> */}
       <Header />
 
       <Hero content={content ?? undefined} />

@@ -23,6 +23,10 @@ export default function Hero({ content }: HeroProps) {
   const buttonText2 = content?.buttonText2 ?? "Browse Courses";
   const infoText = content?.info ?? "No credit card required · Free courses included";
 
+  const titleWords = title.trim().split(/\s+/);
+  const titleFirstThreeWords = titleWords.slice(0, 3).join(" ");
+  const titleRemainingWords = titleWords.slice(3).join(" ");
+
   const stats = [
     {
       icon: Users,
@@ -70,18 +74,10 @@ export default function Hero({ content }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease }}
           >
-            {title.includes("Changing World") ? (
-              <>
-                {title.split("Changing World")[0]}
-                <span className="bg-gradient-to-r from-primary-500 to-primary-800 bg-clip-text text-transparent">
-                  {title.includes("a Changing World") ? "a Changing World" : "Changing World"}
-                </span>
-              </>
-            ) : (
-              <span className="bg-gradient-to-r from-primary-500 to-primary-800 bg-clip-text text-transparent">
-                {title}
-              </span>
-            )}
+            <span className="bg-gradient-to-r from-primary-500 to-primary-800 bg-clip-text text-transparent">
+              {titleFirstThreeWords}
+            </span>
+            {titleRemainingWords ? ` ${titleRemainingWords}` : null}
           </motion.h1>
 
           <motion.p
@@ -139,7 +135,7 @@ export default function Hero({ content }: HeroProps) {
                 <span className="h-3 w-3 rounded-full bg-red-400" />
                 <span className="h-3 w-3 rounded-full bg-yellow-400" />
                 <span className="h-3 w-3 rounded-full bg-green-400" />
-                <span className="mx-auto text-xs text-gray-400">app.igird.com/dashboard</span>
+                <span className="mx-auto text-xs text-gray-400">app.igird.com/courses</span>
               </div>
               {imageUrl ? (
                 <img

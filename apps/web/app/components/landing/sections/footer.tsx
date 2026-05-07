@@ -72,8 +72,8 @@ export default function Footer() {
               />
             </Link>
             <p className="text-sm text-gray-500 leading-relaxed mb-5 max-w-xs">
-              The modern learning management platform for organizations, educators, and learners
-              worldwide.
+              The world&apos;s first Faith-based education platform. Equipping believers with
+              world-class learning through the lens of Kingdom purpose.
             </p>
             <Link
               to="mailto:support@igird.com"
