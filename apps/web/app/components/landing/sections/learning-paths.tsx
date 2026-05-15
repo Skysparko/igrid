@@ -2,6 +2,8 @@ import { Link } from "@remix-run/react";
 import { TrendingUp, BookOpen, GraduationCap, ArrowRight } from "lucide-react";
 import { motion } from "motion/react";
 
+import { ContentfulMarkdown } from "~/components/contentful/contentful-markdown";
+
 import type { LandingScreenContent } from "~/types/contentful";
 
 const STYLES = [
@@ -94,7 +96,11 @@ export default function LearningPaths({ content }: LearningPathsProps) {
                     <Icon className={`h-6 w-6 ${style.color}`} />
                   </div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{path.title}</h3>
-                  <p className="text-sm text-gray-500 leading-relaxed flex-1">{path.description}</p>
+                  <ContentfulMarkdown
+                    content={path.description}
+                    variant="compact"
+                    className="flex-1"
+                  />
                   <div
                     className={`mt-5 flex items-center gap-1.5 text-sm font-medium ${style.color}`}
                   >

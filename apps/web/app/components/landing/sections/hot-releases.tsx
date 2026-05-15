@@ -3,6 +3,7 @@ import { ArrowRight, Flame } from "lucide-react";
 import { motion } from "motion/react";
 
 import DefaultPhotoCourse from "~/assets/svgs/default-photo-course.svg";
+import { ContentfulMarkdown } from "~/components/contentful/contentful-markdown";
 import { Button } from "~/components/ui/button";
 
 import type { GetAvailableCoursesResponse } from "~/api/generated-api";
@@ -82,7 +83,11 @@ export default function HotReleases({ courses, isLoading, content }: HotReleases
                 {tag}
               </div>
               <h2 className="text-2xl font-bold mb-3 leading-snug">{title}</h2>
-              <p className="text-primary-100 text-sm leading-relaxed">{description}</p>
+              <ContentfulMarkdown
+                content={description}
+                variant="compact"
+                className="text-primary-100"
+              />
             </div>
             <Link to="/courses" className="relative mt-6 inline-block">
               <Button className="bg-white text-primary-700 hover:bg-primary-50 font-semibold gap-2 shadow-sm">

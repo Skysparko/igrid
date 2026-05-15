@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 
+import { ContentfulMarkdown } from "~/components/contentful/contentful-markdown";
 import { Button } from "~/components/ui/button";
 
 import type { LandingScreenContent } from "~/types/contentful";
@@ -44,9 +45,11 @@ export default function CTA({ content }: CTAProps) {
             <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
               {title}
             </h2>
-            <p className="text-lg text-primary-100 max-w-2xl mx-auto mb-10 leading-relaxed">
-              {description}
-            </p>
+            <ContentfulMarkdown
+              content={description}
+              variant="inverse"
+              className="max-w-2xl mx-auto mb-10"
+            />
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/auth/register">

@@ -144,6 +144,7 @@ export async function fetchLandingContent(): Promise<LandingScreenContent | null
       includes,
     ),
     howItWorksTitle: f.howItWorksTitle as string | undefined,
+    howItWorksMainTitle: f.howItWorksMainTitle as string | undefined,
     howItWorksDescription: f.howItWorksDescription as string | undefined,
     howItWorksSteps: resolveLinks<HowItWorksStep>(
       f.howItWorksSteps as ContentfulLink[] | undefined,

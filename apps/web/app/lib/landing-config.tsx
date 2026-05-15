@@ -19,29 +19,29 @@ export const siteConfig = {
   },
   header: [
     {
-      trigger: "Features",
+      trigger: "Product",
       content: {
         main: {
           icon: <Icons.logo className="h-6 w-6" />,
           title: "AI-Powered Learning",
-          description: "Enhance your learning experience with intelligent tools.",
-          href: "#",
+          description: "Courses, mentors, and analytics in one platform.",
+          href: "#features",
         },
         items: [
           {
-            href: "#",
-            title: "Interactive Courses",
-            description: "Engage with dynamic, interactive course content.",
+            href: "#features",
+            title: "Platform Features",
+            description: "Interactive lessons, quizzes, and certificates.",
           },
           {
-            href: "#",
-            title: "AI Mentor",
-            description: "Get personalized guidance from AI-powered mentors.",
+            href: "#how-it-works",
+            title: "How It Works",
+            description: "See how learners progress from signup to completion.",
           },
           {
-            href: "#",
-            title: "Progress Tracking",
-            description: "Monitor your learning journey with detailed analytics.",
+            href: "/courses",
+            title: "Course Catalog",
+            description: "Browse every course available on iGird.",
           },
         ],
       },
@@ -53,24 +53,37 @@ export const siteConfig = {
           {
             title: "For Students",
             href: "/courses",
-            description: "Access courses and track your learning progress.",
+            description: "Learn at your pace with progress tracking and AI support.",
           },
           {
             title: "For Educators",
             href: "/admin/courses",
-            description: "Create and manage courses for your students.",
+            description: "Build courses, manage learners, and view insights.",
           },
           {
             title: "For Organizations",
-            href: "#",
-            description: "Enterprise solutions for team training and development.",
+            href: "#white-label",
+            description: "White-label LMS with branding and team management.",
+          },
+          {
+            title: "Faith-Based Learning",
+            href: "#features",
+            description: "Purpose-driven education through a Kingdom lens.",
           },
         ],
       },
     },
     {
-      href: "#",
-      label: "Blog",
+      href: "/courses",
+      label: "Courses",
+    },
+    {
+      href: "#how-it-works",
+      label: "How it Works",
+    },
+    {
+      href: "#white-label",
+      label: "Enterprise",
     },
   ],
   pricing: [

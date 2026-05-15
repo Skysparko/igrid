@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import { ArrowRight, BookOpen, Users, Award } from "lucide-react";
 import { motion } from "motion/react";
 
+import { ContentfulMarkdown } from "~/components/contentful/contentful-markdown";
 import { PlatformLogo } from "~/components/PlatformLogo";
 import { Button } from "~/components/ui/button";
 
@@ -80,14 +81,14 @@ export default function Hero({ content }: HeroProps) {
             {titleRemainingWords ? ` ${titleRemainingWords}` : null}
           </motion.h1>
 
-          <motion.p
-            className="mt-6 max-w-2xl text-lg sm:text-xl text-gray-500 leading-relaxed"
+          <motion.div
+            className="mt-6 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25, ease }}
           >
-            {description}
-          </motion.p>
+            <ContentfulMarkdown content={description} variant="hero" />
+          </motion.div>
 
           <motion.div
             className="mt-10 flex flex-col sm:flex-row items-center gap-4"

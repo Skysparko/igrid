@@ -1,6 +1,7 @@
 import { UserPlus, Search, Rocket, type LucideIcon } from "lucide-react";
 import { motion } from "motion/react";
 
+import { ContentfulMarkdown } from "~/components/contentful/contentful-markdown";
 import Section from "~/components/landing/section";
 
 import type { LandingScreenContent } from "~/types/contentful";
@@ -34,6 +35,7 @@ interface HowItWorksProps {
 
 export default function HowItWorks({ content }: HowItWorksProps) {
   const sectionTitle = content?.howItWorksTitle ?? "How It Works";
+  const sectionMainTitle = content?.howItWorksMainTitle ?? "Up and Running in Minutes";
   const sectionDescription = content?.howItWorksDescription ?? undefined;
 
   const steps =
@@ -48,10 +50,15 @@ export default function HowItWorks({ content }: HowItWorksProps) {
     <Section
       id="how-it-works"
       title={sectionTitle}
-      subtitle="Up and Running in Minutes"
+      subtitle={sectionMainTitle}
       description={
-        sectionDescription ??
-        "Getting started with iGird is simple. Follow three steps to kick off your learning journey."
+        <ContentfulMarkdown
+          content={
+            sectionDescription ??
+            "Getting started with iGird is simple. Follow three steps to kick off your learning journey."
+          }
+          variant="body"
+        />
       }
     >
       <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 relative">
@@ -80,7 +87,11 @@ export default function HowItWorks({ content }: HowItWorksProps) {
                 </span>
               </div>
               <h3 className="text-xl font-semibold text-gray-900 mb-3">{step.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed max-w-xs">{step.description}</p>
+              <ContentfulMarkdown
+                content={step.description}
+                variant="compact"
+                className="max-w-xs"
+              />
             </motion.div>
           );
         })}

@@ -2,7 +2,7 @@ interface SectionProps {
   id?: string;
   title?: string;
   subtitle?: string;
-  description?: string;
+  description?: React.ReactNode;
   children?: React.ReactNode;
   className?: string;
 }
@@ -32,9 +32,9 @@ export default function Section({
               </h3>
             )}
             {description && (
-              <p className="mt-6 text-lg leading-8 text-slate-600 max-w-2xl mx-auto">
+              <div className="mt-6 max-w-2xl mx-auto text-lg leading-8 text-slate-600">
                 {description}
-              </p>
+              </div>
             )}
           </div>
           {children}

@@ -2,6 +2,7 @@ import { Link } from "@remix-run/react";
 import { ArrowRight, Sparkles, Bot } from "lucide-react";
 import { motion } from "motion/react";
 
+import { ContentfulMarkdown } from "~/components/contentful/contentful-markdown";
 import { Button } from "~/components/ui/button";
 
 import type { LandingScreenContent } from "~/types/contentful";
@@ -61,11 +62,11 @@ export default function PromotionalBanners({ content }: PromotionalBannersProps)
                     {card.fields.title}
                   </h2>
                   {card.fields.description && (
-                    <p
-                      className={`${style.body} text-sm md:text-base leading-relaxed mb-6 max-w-xs`}
-                    >
-                      {card.fields.description}
-                    </p>
+                    <ContentfulMarkdown
+                      content={card.fields.description}
+                      variant="compact"
+                      className={`${style.body} mb-6 max-w-xs`}
+                    />
                   )}
                   <Link to="/auth/register">
                     <Button className={`${style.button} font-semibold gap-2 shadow-sm`}>

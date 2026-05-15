@@ -16,17 +16,20 @@ import PromotionalBanners from "~/components/landing/sections/promotional-banner
 import TrendingCourses from "~/components/landing/sections/trending-courses";
 import WhiteLabel from "~/components/landing/sections/white-label";
 import { useLandingContent } from "~/hooks/useLandingContent";
+import { stripMarkdown } from "~/lib/strip-markdown";
 // import { isContentfulConfigured } from "~/lib/contentful";
 
 import type { MetaFunction } from "@remix-run/react";
+
+const DEFAULT_META_DESCRIPTION =
+  "iGird is a modern learning management platform for organizations, educators, and learners. AI-powered mentoring, rich course content, and detailed analytics in one place.";
 
 export const meta: MetaFunction = () => {
   return [
     { title: "iGird — Girding Minds for a Changing World" },
     {
       name: "description",
-      content:
-        "iGird is a modern learning management platform for organizations, educators, and learners. AI-powered mentoring, rich course content, and detailed analytics in one place.",
+      content: DEFAULT_META_DESCRIPTION,
     },
   ];
 };
@@ -60,6 +63,13 @@ export default function LandingPage() {
       console.error("Error fetching courses:", error);
     }
   }, [error]);
+
+  useEffect(() => {
+    if (!content?.description) return;
+
+    const plain = stripMarkdown(content.description);
+    document.querySelector('meta[name="description"]')?.setAttribute("content", plain);
+  }, [content?.description]);
 
   return (
     <main className="bg-white min-h-screen">

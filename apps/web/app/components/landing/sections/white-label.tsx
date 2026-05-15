@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 
+import { ContentfulMarkdown } from "~/components/contentful/contentful-markdown";
 import { Button } from "~/components/ui/button";
 
 import type { LandingScreenContent } from "~/types/contentful";
@@ -119,15 +120,19 @@ export default function WhiteLabel({ content }: WhiteLabelProps) {
             {title}
           </motion.h2>
 
-          <motion.p
-            className="mt-6 text-lg text-gray-400 max-w-2xl mx-auto leading-relaxed"
+          <motion.div
+            className="mt-6 max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            {description}
-          </motion.p>
+            <ContentfulMarkdown
+              content={description}
+              variant="inverse"
+              className="text-gray-400 [&_p]:text-gray-400"
+            />
+          </motion.div>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
@@ -146,7 +151,11 @@ export default function WhiteLabel({ content }: WhiteLabelProps) {
                   <Icon className="h-5 w-5 text-primary-400" />
                 </div>
                 <h3 className="text-base font-semibold text-white mb-2">{cap.title}</h3>
-                <p className="text-sm text-gray-400 leading-relaxed">{cap.description}</p>
+                <ContentfulMarkdown
+                  content={cap.description}
+                  variant="compact"
+                  className="text-gray-400 [&_p]:text-gray-400"
+                />
               </motion.div>
             );
           })}
@@ -174,7 +183,11 @@ export default function WhiteLabel({ content }: WhiteLabelProps) {
           </div>
 
           <div className="flex-shrink-0 flex flex-col gap-4 items-start lg:items-center text-center lg:text-left">
-            <p className="text-gray-400 text-sm max-w-xs">{bigCardDescription}</p>
+            <ContentfulMarkdown
+              content={bigCardDescription}
+              variant="compact"
+              className="max-w-xs text-gray-400 [&_p]:text-gray-400"
+            />
             <Link to="mailto:sales@igird.com">
               <Button
                 size="lg"

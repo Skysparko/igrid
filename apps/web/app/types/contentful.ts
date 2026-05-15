@@ -88,6 +88,7 @@ export interface LandingScreenContent {
   featuresDescription?: string;
   featuresCards?: FeaturesCard[];
   howItWorksTitle?: string;
+  howItWorksMainTitle?: string;
   howItWorksDescription?: string;
   howItWorksSteps?: HowItWorksStep[];
   trendingTitle?: string;
