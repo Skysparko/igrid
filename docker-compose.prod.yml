@@ -1,3 +1,9 @@
+# Production stack — all services start together:
+#   pnpm docker:prod
+#   docker compose -f docker-compose.prod.yml up -d --build
+#
+# S3: MinIO runs in-cluster. Set matching credentials in .env.api (S3_* vars).
+# The API overrides S3_ENDPOINT to http://minio:9000 for container networking.
 services:
   ollama:
     image: ollama/ollama:latest
@@ -37,6 +43,9 @@ services:
     container_name: mentingo-api
     restart: unless-stopped
     env_file: .env.api
+    environment:
+      # Override host-local S3 endpoint when API runs inside Docker
+      S3_ENDPOINT: http://minio:9000
     command: server
     ports:
       - "3001:3000"
@@ -47,6 +56,10 @@ services:
         condition: service_started
       redis:
         condition: service_started
+      minio:
+        condition: service_healthy
+      create-minio-bucket:
+        condition: service_completed_successfully
     # OLLAMA_BASE_URL should be set to http://ollama:11434/api in .env.api
     # This uses Docker's internal networking (service name)
 
@@ -64,6 +77,40 @@ services:
     image: redis:latest
     container_name: mentingo-redis
     restart: unless-stopped
+
+  minio:
+    image: quay.io/minio/minio:latest
+    container_name: mentingo-minio
+    restart: unless-stopped
+    ports:
+      - "9100:9000" # S3 API (optional; for external tools / debugging)
+      - "9101:9001" # Web console
+    environment:
+      # Must match S3_ACCESS_KEY_ID / S3_SECRET_ACCESS_KEY / S3_BUCKET_NAME in .env.api
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+      MINIO_DEFAULT_BUCKETS: my-local-bucket
+    volumes:
+      - minio-data:/data
+    command: server /data --console-address ":9001"
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  create-minio-bucket:
+    image: quay.io/minio/mc:latest
+    container_name: mentingo-minio-setup
+    depends_on:
+      minio:
+        condition: service_healthy
+    restart: "no"
+    env_file: .env.api
+    volumes:
+      - ./create-minio-bucket.sh:/create-minio-bucket.sh
+    entrypoint: ["/bin/sh", "/create-minio-bucket.sh"]
 
   ui:
     build:
@@ -90,4 +137,6 @@ services:
 volumes:
   db-data:
   ollama-data:
+    driver: local
+  minio-data:
     driver: local

@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "build": "turbo build",
+    "predev": "docker compose up -d",
     "dev": "turbo dev",
     "dev:test": "turbo dev:test",
     "setup:unix": "chmod +x setup.sh && ./setup.sh",

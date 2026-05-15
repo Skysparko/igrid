@@ -1,3 +1,6 @@
+# Infrastructure for local development — all services start together:
+#   docker compose up -d
+#   pnpm dev  (also runs `docker compose up -d` via predev)
 services:
   project-db:
     image: pgvector/pgvector:pg16
@@ -30,6 +33,7 @@ services:
       - lms-redis-data:/data
   mailhog:
     image: mailhog/mailhog
+    restart: always
     ports:
       - 1025:1025
       - 8025:8025
@@ -39,11 +43,13 @@ services:
     container_name: minio
     restart: always
     ports:
-      - "9100:9000" # MinIO API
+      - "9100:9000" # MinIO API (S3_ENDPOINT in apps/api/.env)
       - "9101:9001" # Web console
     environment:
       MINIO_ROOT_USER: minioadmin
       MINIO_ROOT_PASSWORD: minioadmin
+      # Must match S3_BUCKET_NAME in apps/api/.env (default: my-local-bucket)
+      MINIO_DEFAULT_BUCKETS: my-local-bucket
     volumes:
       - minio-data:/data
     command: server /data --console-address ":9001"
@@ -52,6 +58,7 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+      start_period: 10s
 
   create-minio-bucket:
     image: quay.io/minio/mc:latest
@@ -59,7 +66,7 @@ services:
     depends_on:
       minio:
         condition: service_healthy
-    restart: "no"
+    restart: on-failure
     env_file: ./apps/api/.env
     volumes:
       - ./create-minio-bucket.sh:/create-minio-bucket.sh
