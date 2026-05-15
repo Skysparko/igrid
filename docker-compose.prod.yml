@@ -44,8 +44,10 @@ services:
     restart: unless-stopped
     env_file: .env.api
     environment:
-      # Override host-local S3 endpoint when API runs inside Docker
+      # Internal MinIO URL for uploads from the API container
       S3_ENDPOINT: http://minio:9000
+      # Public URL used in presigned links returned to the browser
+      S3_PUBLIC_ENDPOINT: http://localhost:9100
     command: server
     ports:
       - "3001:3000"
